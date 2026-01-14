@@ -21,7 +21,7 @@ const menuItems = [
     href: "/admin",
   },
   {
-    title: "Mood Exercises",
+    title: "Exercises",
     icon: MoodExercisesIcon,
     href: "/admin/mood-exercises",
   },
@@ -60,13 +60,13 @@ export default function DashboardSidebar() {
   const currentPath = pathname;
 
   return (
-    <aside className="hidden lg:flex flex-col w-[320px] h-full bg-white p-6 justify-between shrink-0">
+    <aside className="hidden lg:flex flex-col w-[340px] h-full bg-white p-6 justify-between shrink-0">
       <div className="flex flex-col w-full">
         <div className="mb-13 flex items-center justify-center">
           <Image
             src="/mesmer.png"
             alt="MESMER"
-            width={292}
+            width={340}
             height={95}
             className="object-contain"
             priority
@@ -86,7 +86,7 @@ export default function DashboardSidebar() {
               <Link
                 key={item.title}
                 href={item.href}
-                className={`flex items-center gap-3 w-full max-w-[292px] h-[48px] rounded-[12px] px-4 transition-all duration-200 ${
+                className={`flex items-center gap-3 w-full max-w-[340px] h-[48px] rounded-[12px] px-4 transition-all duration-200 ${
                   isActive
                     ? "bg-[#8F00FF] text-white"
                     : "text-[#757575] hover:bg-gray-50"

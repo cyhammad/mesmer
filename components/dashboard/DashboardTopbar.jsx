@@ -5,8 +5,7 @@ import { BellIcon } from "@/components/icons/icons";
 
 const DashboardTopbar = () => {
   return (
-    <div className="w-full h-[64px] lg:h-[80px] flex items-end
-    ">
+    <div className="w-full h-[64px] lg:h-[80px] flex items-end">
       <header className="w-full h-[64px] lg:h-[80px] bg-white border-b lg:border-t lg:border-l border-gray-200 lg:rounded-tl-[30px] flex items-center justify-between px-4 lg:px-6">
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
