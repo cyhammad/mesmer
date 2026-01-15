@@ -53,7 +53,11 @@ const MoodExercisesPage = () => {
       {/* Exercises Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {exercises.map((exercise, idx) => (
-          <ExerciseCard key={idx} exercise={exercise} />
+          <ExerciseCard
+            key={idx}
+            exercise={exercise}
+            isDraft={activeTab === "Drafts"}
+          />
         ))}
       </div>
     </div>
