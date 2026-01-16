@@ -33,7 +33,7 @@ const menuItems = [
   {
     title: "Mesmer Tips",
     icon: MesmerTipsIcon,
-    href: "/admin/tips",
+    href: "/admin/mesmer-tips",
   },
   {
     title: "Audio Content",
