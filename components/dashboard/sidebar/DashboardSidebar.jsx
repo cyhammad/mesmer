@@ -3,6 +3,15 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import {
   DashboardIcon,
   MoodExercisesIcon,
@@ -52,22 +61,19 @@ const menuItems = [
   },
 ];
 
-export default function DashboardSidebar() {
-  const pathname = usePathname();
+// Reusable navigation component
+const SidebarNav = ({ currentPath, onNavigate }) => {
   const router = useRouter();
 
-  // Normalize current path for comparison
-  const currentPath = pathname;
-
   return (
-    <aside className="hidden lg:flex flex-col w-[340px] h-full bg-white p-6 justify-between shrink-0">
+    <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col w-full">
-        <div className="mb-13 flex items-center justify-center">
+        <div className="mb-8 flex items-center justify-center">
           <Image
             src="/mesmer.png"
             alt="MESMER"
-            width={340}
-            height={95}
+            width={200}
+            height={56}
             className="object-contain"
             priority
           />
@@ -76,7 +82,6 @@ export default function DashboardSidebar() {
         <nav className="flex flex-col gap-[4px] w-full">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            // Exact match for dashboard root, startsWith for others to handle subpaths if needed
             const isActive =
               item.href === "/admin"
                 ? currentPath === "/admin"
@@ -86,7 +91,8 @@ export default function DashboardSidebar() {
               <Link
                 key={item.title}
                 href={item.href}
-                className={`flex items-center gap-3 w-full max-w-[340px] h-[48px] rounded-[12px] px-4 transition-all duration-200 ${
+                onClick={onNavigate}
+                className={`flex items-center gap-3 w-full h-[48px] rounded-[12px] px-4 transition-all duration-200 ${
                   isActive
                     ? "bg-[#8F00FF] text-white"
                     : "text-[#757575] hover:bg-gray-50"
@@ -106,13 +112,48 @@ export default function DashboardSidebar() {
 
       <div className="w-full">
         <button
-          onClick={() => router.push("/admin/sign-in")}
+          onClick={() => {
+            if (onNavigate) onNavigate();
+            router.push("/admin/sign-in");
+          }}
           className="flex items-center justify-center gap-3 w-full h-[52px] text-[#757575] hover:text-[#8F00FF] hover:bg-gray-50 rounded-2xl transition-all duration-200"
         >
           <LogoutIcon className="w-5 h-5" />
           <span className="font-medium text-[15px]">Logout</span>
         </button>
       </div>
+    </div>
+  );
+};
+
+// Mobile Sidebar with Sheet
+export function MobileSidebar() {
+  const pathname = usePathname();
+
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <button className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          <Menu className="w-6 h-6 text-[#1A1A1A]" />
+        </button>
+      </SheetTrigger>
+      <SheetContent side="left" className="w-[280px] p-6 bg-white">
+        <VisuallyHidden.Root>
+          <SheetTitle>Navigation Menu</SheetTitle>
+        </VisuallyHidden.Root>
+        <SidebarNav currentPath={pathname} onNavigate={() => {}} />
+      </SheetContent>
+    </Sheet>
+  );
+}
+
+// Desktop Sidebar
+export default function DashboardSidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="hidden lg:flex flex-col w-[340px] h-full bg-white p-6 justify-between shrink-0">
+      <SidebarNav currentPath={pathname} />
     </aside>
   );
 }

@@ -57,14 +57,14 @@ const VideoContentPage = () => {
   ];
 
   return (
-    <div className="p-6 lg:p-6 flex flex-col gap-8 min-h-screen max-w-[1200px] mx-auto">
+    <div className="p-4 sm:p-6 flex flex-col gap-6 sm:gap-8 min-h-screen">
       <PageHeader
         title="Manage Video Files"
         subtitle="Create and manage tips for different mood categories"
       />
 
-      {/* Video Grid - 3 columns vertical cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center sm:justify-items-start focus:outline-none">
+      {/* Video Grid - responsive columns */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center">
         {videoItems.map((video, idx) => (
           <VideoCard key={idx} video={video} />
         ))}

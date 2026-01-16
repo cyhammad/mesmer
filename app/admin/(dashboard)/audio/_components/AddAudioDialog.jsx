@@ -99,20 +99,20 @@ const AddAudioDialog = ({ children }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl"
+        className="fixed inset-0 translate-x-0 translate-y-0 sm:inset-auto sm:right-4 sm:left-auto sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 max-w-full sm:max-w-[562px] w-full p-0 gap-0 h-full sm:h-[calc(100vh-48px)] flex flex-col bg-white sm:rounded-[24px] rounded-none overflow-hidden border-none outline-none shadow-2xl"
       >
         {/* Header */}
-        <div className="flex flex-col gap-2 p-6 border-b border-[#EED9FF] shrink-0">
+        <div className="flex flex-col gap-2 p-4 sm:p-6 border-b border-[#EED9FF] shrink-0">
           <DialogClose className="outline-none">
             <BackArrow className="flex justify-start w-6 h-6 cursor-pointer" />
           </DialogClose>
-          <DialogTitle className="flex justify-start text-[24px] font-bold text-[#111827]">
+          <DialogTitle className="flex justify-start text-[20px] sm:text-[24px] font-bold text-[#111827]">
             Add New Audio
           </DialogTitle>
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 scrollbar-hide">
           <div className="flex flex-col gap-6">
             <div>
               <Label>Title</Label>
@@ -171,16 +171,16 @@ const AddAudioDialog = ({ children }) => {
         </div>
 
         {/* Footer */}
-        <div className="p-6 border-t border-[#F3F4F6] shrink-0 flex gap-4 bg-white">
+        <div className="p-4 sm:p-6 border-t border-[#F3F4F6] shrink-0 flex gap-3 sm:gap-4 bg-white">
           <DialogClose asChild>
             <Button
               variant="outline"
-              className="w-[110px] h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[16px] font-bold"
+              className="w-full sm:w-[110px] h-[44px] sm:h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] sm:text-[16px] font-bold"
             >
               Cancel
             </Button>
           </DialogClose>
-          <Button className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold">
+          <Button className="flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold">
             Create Audio
           </Button>
         </div>

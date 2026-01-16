@@ -66,11 +66,11 @@ const EditTipDialog = ({ children, tip }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="max-w-[460px] w-full p-0 gap-0 bg-white rounded-[12px] overflow-hidden border-none outline-none shadow-2xl"
+        className="fixed inset-0 translate-x-0 translate-y-0 sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-[460px] w-full p-0 gap-0 sm:h-auto h-full flex flex-col bg-white sm:rounded-[12px] rounded-none overflow-hidden border-none outline-none shadow-2xl"
       >
         {/* Header */}
-        <div className="flex justify-between items-center p-5 border-b border-[#F3F4F6]">
-          <DialogTitle className="text-[22px] font-bold text-[#111827]">
+        <div className="flex justify-between items-center p-4 sm:p-5 border-b border-[#F3F4F6] shrink-0">
+          <DialogTitle className="text-[20px] sm:text-[22px] font-bold text-[#111827]">
             Edit Tip
           </DialogTitle>
           <DialogClose className="outline-none hover:bg-gray-100 rounded-full p-1 transition-colors">
@@ -79,7 +79,7 @@ const EditTipDialog = ({ children, tip }) => {
         </div>
 
         {/* Content */}
-        <div className="p-5 flex flex-col gap-3">
+        <div className="p-4 sm:p-5 flex-1 sm:flex-none overflow-y-auto flex flex-col gap-3">
           <div>
             <Label>Enter your tip</Label>
             <TextArea placeholder="Brief description" value={tip.content} />
@@ -101,23 +101,23 @@ const EditTipDialog = ({ children, tip }) => {
         </div>
 
         {/* Footer */}
-        <div className="p-5 border-t border-[#F3F4F6] flex items-center justify-between gap-3 bg-white">
+        <div className="p-4 sm:p-5 border-t border-[#F3F4F6] flex flex-col sm:flex-row items-center sm:justify-between gap-3 bg-white shrink-0">
           <ScheduleTipDialog>
-            <button className="text-[#8F00FF] text-[12px] font-bold hover:underline whitespace-nowrap shrink-0">
+            <button className="text-[#8F00FF] text-[12px] font-bold hover:underline whitespace-nowrap order-2 sm:order-1">
               Reschedule
             </button>
           </ScheduleTipDialog>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
             <DialogClose asChild>
               <Button
                 variant="outline"
-                className="w-[80px] h-[42px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] font-bold"
+                className="flex-1 sm:flex-none h-[42px] sm:w-[80px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] font-bold"
               >
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
+            <Button className="flex-[2] sm:flex-none h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
               Save Changes
             </Button>
           </div>
