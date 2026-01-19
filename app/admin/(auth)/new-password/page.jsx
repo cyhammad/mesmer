@@ -23,7 +23,7 @@ const NewPasswordPage = () => {
           <input
             type="password"
             placeholder="Enter"
-            className="w-full bg-white border border-[#EDEDED] rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-300 focus:ring-purple-500 outline-none text-[15px]"
+            className="w-full h-[50px] bg-white border border-[#EDEDED] rounded-[10px] px-5 py-4 text-gray-900 placeholder:text-gray-300 focus:ring-purple-500 outline-none text-[15px]"
           />
         </div>
 
@@ -35,7 +35,7 @@ const NewPasswordPage = () => {
           <input
             type="password"
             placeholder="Enter"
-            className="w-full bg-white border border-[#EDEDED] rounded-xl px-5 py-4 text-gray-900 placeholder:text-gray-300 focus:ring-purple-500 outline-none text-[15px]"
+            className="w-full h-[50px] bg-white border border-[#EDEDED] rounded-[10px] px-5 py-4 text-gray-900 placeholder:text-gray-300 focus:ring-purple-500 outline-none text-[15px]"
           />
         </div>
 

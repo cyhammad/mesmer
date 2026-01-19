@@ -5,7 +5,13 @@ import Image from "next/image";
 
 const AdminAuthLayout = ({ children }) => {
   return (
-    <div className="min-h-screen w-full min-w-[464.15px] flex flex-col items-center justify-center bg-gradient-to-b from-white to-[#F9EBFF]">
+    <div
+      className="min-h-screen w-full md:min-w-[464.15px] flex flex-col items-center justify-center"
+      style={{
+        background:
+          "linear-gradient(180.01deg, #FFFFFF 0.01%, #F5E9FC 88.16%, #FAD1F0 108.56%)",
+      }}
+    >
       {/* --- Static Logo Section --- */}
       <div className="my-3">
         <Image
@@ -19,7 +25,7 @@ const AdminAuthLayout = ({ children }) => {
       </div>
 
       {/* --- Dynamic Content Section --- */}
-      <div className="w-full max-w-[464.15px]">{children}</div>
+      <div className="w-full max-w-[464.15px] px-5 md:px-0">{children}</div>
     </div>
   );
 };
