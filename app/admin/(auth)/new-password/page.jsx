@@ -19,7 +19,7 @@ const NewPasswordPage = () => {
       <form className="flex flex-col gap-2">
         {/* Password Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px] pl-1">Password</label>
+          <label className="text-[#717171] text-[15px]">Password</label>
           <input
             type="password"
             placeholder="Enter"
@@ -29,7 +29,7 @@ const NewPasswordPage = () => {
 
         {/* Confirm Password Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px] pl-1">
+          <label className="text-[#717171] text-[15px]">
             Confirm Password
           </label>
           <input
@@ -40,7 +40,7 @@ const NewPasswordPage = () => {
         </div>
 
         {/* Remember Password Link */}
-        <div className="mt-2 ml-1 text-[15px] font-medium text-[#717171]">
+        <div className="mt-2 ml-3 text-[15px] font-medium text-[#717171]">
           Remember Password?{" "}
           <Link
             href="/admin/sign-in"

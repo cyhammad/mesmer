@@ -18,7 +18,7 @@ const OtpPage = () => {
       <form className="flex flex-col gap-2">
         {/* OTP Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px] pl-1">Enter OTP</label>
+          <label className="text-[#717171] text-[15px]">Enter OTP</label>
           <input
             type="text"
             placeholder="Enter"

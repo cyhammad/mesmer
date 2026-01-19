@@ -19,7 +19,7 @@ const SignInPage = () => {
       <form className="flex flex-col gap-2">
         {/* Email Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px] pl-1">Email</label>
+          <label className="text-[#717171] text-[15px]">Email</label>
           <input
             type="email"
             placeholder="Enter"
@@ -29,7 +29,7 @@ const SignInPage = () => {
 
         {/* Password Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px] pl-1">Password</label>
+          <label className="text-[#717171] text-[15px]">Password</label>
           <input
             type="password"
             placeholder="Enter"
@@ -40,7 +40,7 @@ const SignInPage = () => {
         {/* Forgot Password Link */}
         <Link
           href="/admin/forget-password"
-          className="text-[#9D28F0] mt-2 font-medium text-[15px] hover:text-[#8b2ef0] transition-colors"
+          className="text-[#9D28F0] pl-[14px] mt-2 font-medium text-[14px] hover:text-[#8b2ef0] transition-colors"
         >
           Forgot Password?
         </Link>
