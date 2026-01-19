@@ -6,7 +6,7 @@ import DeleteVideoDialog from "./DeleteVideoDialog";
 
 const VideoCard = ({ video }) => {
   return (
-    <div className="bg-white w-full max-w-full sm:max-w-[334.6px] min-h-[240px] sm:min-h-[265px] h-auto rounded-[12px] sm:rounded-[16px] border border-[#EED9FF] overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
+    <div className="bg-white w-full max-w-full min-h-[240px] sm:min-h-[265px] h-auto rounded-[12px] sm:rounded-[16px] border border-[#EED9FF] overflow-hidden flex flex-col hover:shadow-md transition-shadow group">
       {/* Thumbnail Area - with Play Button Overlay */}
       <div className="relative w-full h-[154px] shrink-0">
         {video.thumbnail ? (

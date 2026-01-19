@@ -50,7 +50,7 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
       "px-4 py-2 rounded-[12px] text-[14px] font-medium transition-all flex items-center gap-2",
       isSelected
         ? "bg-[#F3E8FF] text-[#8F00FF] border border-[#8F00FF]"
-        : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30"
+        : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30",
     )}
   >
     {name}
@@ -79,7 +79,7 @@ const MediaPlaceholder = ({ label, fileName, onRemove }) => (
 
 const EditVideoDialog = ({ children, video }) => {
   const [selectedCategory, setSelectedCategory] = useState(
-    video?.category || "School & Exams"
+    video?.category || "School & Exams",
   );
   const [selectedMood, setSelectedMood] = useState(video?.mood || "Confident");
 
@@ -106,7 +106,7 @@ const EditVideoDialog = ({ children, video }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed inset-0 translate-x-0 translate-y-0 sm:inset-auto sm:right-6 sm:left-auto sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 max-w-full sm:max-w-[562px] w-full p-0 gap-0 h-full sm:h-[calc(100vh-48px)] flex flex-col bg-white sm:rounded-[24px] rounded-none overflow-hidden border-none outline-none shadow-2xl"
+        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90%] max-sm:max-w-[400px] max-sm:h-[80vh] max-sm:rounded-[20px]"
       >
         {/* Header */}
         <div className="flex flex-col gap-2 p-4 sm:p-6 border-b border-[#EED9FF] shrink-0">

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { BackArrow, TrashIconWhite } from "./Icons";
-import AddResultDialog from "./AddResultDialog";
+import EditResultDialog from "./EditResultDialog";
 
 const Label = ({ children, required }) => (
   <label className="text-[14px] font-medium text-[#717171] mb-2 block">
@@ -37,7 +37,7 @@ const TextArea = ({ value, placeholder, rows = 4 }) => (
   />
 );
 
-const StepCard = ({ index, onDelete }) => {
+const StepCard = ({ index, step, onDelete }) => {
   const stepNumber = String(index + 1).padStart(2, "0");
   return (
     <div className="bg-[#F3E8FF] rounded-[24px] p-6 relative flex flex-col gap-4">
@@ -55,19 +55,27 @@ const StepCard = ({ index, onDelete }) => {
 
       <div>
         <Label required>Step Title</Label>
-        <Input placeholder="Enter" />
+        <Input value={step?.title} placeholder="Enter" />
       </div>
 
       <div>
         <Label required>Description</Label>
-        <TextArea placeholder="Brief description of the exercise" rows={3} />
+        <TextArea
+          value={step?.description}
+          placeholder="Brief description of the exercise"
+          rows={3}
+        />
       </div>
     </div>
   );
 };
 
-const CreateExerciseStepsDialog = ({ children }) => {
-  const [steps, setSteps] = useState([{}]);
+const EditExerciseStepsDialog = ({ children, exercise }) => {
+  const [steps, setSteps] = useState(
+    Array.isArray(exercise?.steps)
+      ? exercise.steps
+      : [{ title: "Step 1", description: "Description for step 1" }],
+  );
 
   const addStep = () => {
     setSteps([...steps, {}]);
@@ -93,7 +101,7 @@ const CreateExerciseStepsDialog = ({ children }) => {
             <BackArrow className="flex justify-start w-6 h-6 cursor-pointer" />
           </DialogClose>
           <DialogTitle className="flex justify-start text-[24px] font-bold text-[#111827]">
-            Create Exercise Steps
+            Edit Exercise Steps
           </DialogTitle>
         </div>
 
@@ -105,10 +113,11 @@ const CreateExerciseStepsDialog = ({ children }) => {
             </h3>
 
             <div className="flex flex-col gap-6">
-              {steps.map((_, index) => (
+              {steps.map((step, index) => (
                 <StepCard
                   key={index}
                   index={index}
+                  step={step}
                   onDelete={() => deleteStep(index)}
                 />
               ))}
@@ -133,15 +142,15 @@ const CreateExerciseStepsDialog = ({ children }) => {
               Cancel
             </Button>
           </DialogClose>
-          <AddResultDialog>
+          <EditResultDialog exercise={exercise}>
             <Button className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold">
-              Create Exercise
+              Save & Edit Result
             </Button>
-          </AddResultDialog>
+          </EditResultDialog>
         </div>
       </DialogContent>
     </Dialog>
   );
 };
 
-export default CreateExerciseStepsDialog;
+export default EditExerciseStepsDialog;

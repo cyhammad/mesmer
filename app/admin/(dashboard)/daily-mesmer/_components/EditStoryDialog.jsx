@@ -36,7 +36,7 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
       "px-3 py-1.5 rounded-[10px] text-[12px] font-medium transition-all flex items-center gap-1.5",
       isSelected
         ? "bg-white text-[#111827] border border-[#8F00FF]"
-        : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30"
+        : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30",
     )}
   >
     {name}
@@ -50,7 +50,7 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
 
 const EditStoryDialog = ({ children, story }) => {
   const [selectedCategory, setSelectedCategory] = useState(
-    story.category || "School & Exams"
+    story.category || "School & Exams",
   );
 
   const categories = [
@@ -67,11 +67,11 @@ const EditStoryDialog = ({ children, story }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed inset-0 translate-x-0 translate-y-0 sm:inset-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-[460px] w-full p-0 gap-0 sm:h-auto h-full flex flex-col bg-white sm:rounded-[12px] rounded-none overflow-hidden border-none outline-none shadow-2xl"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[460px] w-[90%] p-0 gap-0 h-auto max-h-[90vh] flex flex-col bg-white rounded-[12px] overflow-hidden border-none outline-none shadow-2xl"
       >
         {/* Header */}
         <div className="flex justify-between items-center p-4 sm:p-5 border-b border-[#F3F4F6] shrink-0">
-          <DialogTitle className="text-[20px] sm:text-[22px] font-bold text-[#111827]">
+          <DialogTitle className="text-[28px] font-semibold text-[#111827]">
             Edit Story
           </DialogTitle>
           <DialogClose className="outline-none hover:bg-gray-100 rounded-full p-1 transition-colors">
@@ -80,7 +80,7 @@ const EditStoryDialog = ({ children, story }) => {
         </div>
 
         {/* Content */}
-        <div className="p-4 sm:p-5 flex-1 sm:flex-none overflow-y-auto flex flex-col gap-3">
+        <div className="p-4 sm:p-5 flex-1 sm:flex-none overflow-y-auto flex flex-col">
           <div>
             <Label>Enter your story</Label>
             <TextArea placeholder="Brief description" value={story.content} />
@@ -109,16 +109,16 @@ const EditStoryDialog = ({ children, story }) => {
             </button>
           </ScheduleStoryDialog>
 
-          <div className="flex items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
+          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
             <DialogClose asChild>
               <Button
                 variant="outline"
-                className="flex-1 sm:flex-none h-[42px] sm:w-[80px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] font-bold"
+                className="w-full sm:w-[80px] h-[42px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] font-bold"
               >
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="flex-[2] sm:flex-none h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
+            <Button className="w-full sm:w-auto h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
               Save Changes
             </Button>
           </div>

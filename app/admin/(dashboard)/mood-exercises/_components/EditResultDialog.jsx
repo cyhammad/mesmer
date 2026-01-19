@@ -15,15 +15,16 @@ const Label = ({ children }) => (
   </label>
 );
 
-const TextArea = ({ placeholder, rows = 8 }) => (
+const TextArea = ({ value, placeholder, rows = 8 }) => (
   <textarea
+    defaultValue={value}
     placeholder={placeholder}
     rows={rows}
     className="w-full rounded-[12px] border border-[#E5E7EB] bg-white p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
   />
 );
 
-const AddResultDialog = ({ children }) => {
+const EditResultDialog = ({ children, exercise }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -37,7 +38,7 @@ const AddResultDialog = ({ children }) => {
             <BackArrow className="flex justify-start w-6 h-6 cursor-pointer" />
           </DialogClose>
           <DialogTitle className="flex justify-start text-[24px] font-bold text-[#111827]">
-            Add Result
+            Edit Result
           </DialogTitle>
         </div>
 
@@ -50,7 +51,14 @@ const AddResultDialog = ({ children }) => {
 
             <div>
               <Label>Message to User</Label>
-              <TextArea placeholder="Write here" rows={10} />
+              <TextArea
+                value={
+                  exercise?.resultMessage ||
+                  "Congratulations on completing this exercise! You're making great progress on your journey."
+                }
+                placeholder="Write here"
+                rows={10}
+              />
             </div>
           </div>
         </div>
@@ -71,7 +79,7 @@ const AddResultDialog = ({ children }) => {
               </Button>
             </DialogClose>
             <Button className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold">
-              Make it Live
+              Update Exercise
             </Button>
           </div>
         </div>
@@ -80,4 +88,4 @@ const AddResultDialog = ({ children }) => {
   );
 };
 
-export default AddResultDialog;
+export default EditResultDialog;

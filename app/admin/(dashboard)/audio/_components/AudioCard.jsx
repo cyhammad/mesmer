@@ -6,7 +6,7 @@ import DeleteAudioDialog from "./DeleteAudioDialog";
 
 const AudioCard = ({ audio }) => {
   return (
-    <div className="bg-white w-full max-w-full sm:max-w-[514px] min-h-[100px] sm:h-[118px] p-3 sm:p-4 flex items-center gap-3 sm:gap-[12px] rounded-[12px] sm:rounded-[16px] border-[1.5px] border-[#EED9FF]">
+    <div className="bg-white w-full max-w-full min-h-[100px] sm:h-[118px] p-3 sm:p-4 flex items-center gap-3 sm:gap-[12px] rounded-[12px] sm:rounded-[16px] border-[1.5px] border-[#EED9FF]">
       {/* Thumbnail - responsive size */}
       <div className="min-w-[70px] sm:min-w-[86px] h-[70px] sm:h-[86px] rounded-[10px] sm:rounded-[12px] overflow-hidden flex-shrink-0 bg-[#0F172A] relative">
         {audio.thumbnail ? (

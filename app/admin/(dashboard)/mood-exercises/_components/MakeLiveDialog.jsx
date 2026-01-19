@@ -18,7 +18,7 @@ const MakeLiveDialog = ({ children, onConfirm }) => {
       <DialogContent
         showCloseButton={false}
         // Figma specs: 562px width, 216px height, 24px gap, 24px radius
-        className="max-w-[562px] w-full p-6 flex flex-col gap-6 bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-xl"
+        className="max-w-[562px] w-full p-6 flex flex-col gap-6 bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-sm:w-[90%] max-sm:max-w-[400px]"
         style={{ height: "216px" }}
         // Prevent click propogation from the content if necessary, though Dialog overlay handles modal behavior
         onClick={(e) => e.stopPropagation()}

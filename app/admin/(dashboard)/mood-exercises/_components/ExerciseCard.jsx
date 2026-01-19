@@ -8,7 +8,7 @@ import DeleteExerciseDialog from "./DeleteExerciseDialog";
 const ExerciseCard = ({ exercise, isDraft }) => {
   return (
     <ExerciseDetailsDialog exercise={exercise}>
-      <div className="bg-white w-[334.6px] h-full min-h-[226px] p-4 flex flex-col gap-6 rounded-[16px] border-[1.5px] border-[#EED9FF] hover:shadow-md transition-shadow cursor-pointer text-left">
+      <div className="bg-white w-full h-full min-h-[226px] p-4 flex flex-col gap-6 rounded-[16px] border-[1.5px] border-[#EED9FF] hover:shadow-md transition-shadow cursor-pointer text-left">
         {/* Card Header */}
         <div className="flex justify-between items-center mb-0.5">
           <span className="bg-[#F3E8FF] text-[#8F00FF] text-[15px] font-medium py-3 px-3 rounded-full">

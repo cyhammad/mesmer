@@ -36,8 +36,8 @@ const DeleteExerciseDialog = ({ children, onConfirm }) => {
         </div>
 
         {/* Footer / Actions */}
-        <div className="flex items-center gap-3 sm:gap-4 mt-auto">
-          <DialogClose asChild>
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-auto w-full">
+          <DialogClose asChild className="w-full sm:w-auto">
             <Button
               variant="outline"
               className="w-full sm:w-[110px] h-[44px] sm:h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] sm:text-[16px] font-bold"
@@ -46,7 +46,7 @@ const DeleteExerciseDialog = ({ children, onConfirm }) => {
             </Button>
           </DialogClose>
           <Button
-            className="flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold"
+            className="w-full sm:flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold"
             onClick={() => {
               if (onConfirm) onConfirm();
             }}

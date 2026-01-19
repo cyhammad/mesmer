@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { BackArrow, CloudUploadIcon, ReadIcon, CheckmarkIcon } from "./Icons";
 import { cn } from "@/lib/utils";
+import EditExerciseStepsDialog from "./EditExerciseStepsDialog";
 
 const Label = ({ children, required }) => (
   <label className="text-[14px] font-medium text-[#717171] mb-2 block">
@@ -50,7 +51,7 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
       "px-4 py-2 rounded-[12px] text-[14px] font-medium transition-all flex items-center gap-2",
       isSelected
         ? "bg-[#F3E8FF] text-[#8F00FF] border border-[#8F00FF]"
-        : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30"
+        : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30",
     )}
   >
     {name}
@@ -99,7 +100,7 @@ const EditExerciseDialog = ({ children, exercise }) => {
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed inset-0 translate-x-0 translate-y-0 sm:inset-auto sm:right-6 sm:left-auto sm:top-1/2 sm:-translate-y-1/2 sm:translate-x-0 max-w-full sm:max-w-[562px] w-full p-0 gap-0 h-full sm:h-[calc(100vh-48px)] flex flex-col bg-white sm:rounded-[24px] rounded-none overflow-hidden border-none outline-none shadow-2xl"
+        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90%] max-sm:max-w-[400px] max-sm:h-[80vh] max-sm:rounded-[20px]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -227,12 +228,14 @@ const EditExerciseDialog = ({ children, exercise }) => {
               Cancel
             </Button>
           </DialogClose>
-          <Button
-            className="flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Save & Next
-          </Button>
+          <EditExerciseStepsDialog exercise={exercise}>
+            <Button
+              className="flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Save & Next
+            </Button>
+          </EditExerciseStepsDialog>
         </div>
       </DialogContent>
     </Dialog>
