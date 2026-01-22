@@ -38,7 +38,7 @@ export function NewUsersTable() {
   return (
     <div className="bg-white p-6 lg:p-5 rounded-[20px] border border-[#EED9FF]">
       <h3
-        className="text-lg font-semibold text-[#1A1A1A] mb-8"
+        className="text-[24px] font-semibold text-[#1A1A1A] mb-4"
         style={{ fontFamily: "var(--font-nunito-sans)" }}
       >
         New Users

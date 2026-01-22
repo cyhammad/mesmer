@@ -22,6 +22,7 @@ import {
   SettingsIcon,
   LogoutIcon,
 } from "@/components/icons/icons";
+import LogoutDialog from "@/components/dashboard/LogoutDialog";
 
 const menuItems = [
   {
@@ -72,8 +73,8 @@ const SidebarNav = ({ currentPath, onNavigate }) => {
           <Image
             src="/mesmer.png"
             alt="MESMER"
-            width={200}
-            height={56}
+            width={300}
+            height={60}
             className="object-contain"
             priority
           />
@@ -111,16 +112,12 @@ const SidebarNav = ({ currentPath, onNavigate }) => {
       </div>
 
       <div className="w-full">
-        <button
-          onClick={() => {
-            if (onNavigate) onNavigate();
-            router.push("/admin/sign-in");
-          }}
-          className="flex items-center justify-center gap-3 w-full h-[52px] text-[#757575] hover:text-[#8F00FF] hover:bg-gray-50 rounded-2xl transition-all duration-200"
-        >
-          <LogoutIcon className="w-5 h-5" />
-          <span className="font-medium text-[15px]">Logout</span>
-        </button>
+        <LogoutDialog>
+          <button className="flex items-center justify-center gap-3 w-full h-[52px] text-[#757575] hover:text-[#8F00FF] hover:bg-gray-50 rounded-2xl transition-all duration-200">
+            <LogoutIcon className="w-5 h-5" />
+            <span className="font-medium text-[15px]">Logout</span>
+          </button>
+        </LogoutDialog>
       </div>
     </div>
   );

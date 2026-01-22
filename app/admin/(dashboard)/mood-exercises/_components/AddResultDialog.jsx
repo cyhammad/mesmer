@@ -29,7 +29,7 @@ const AddResultDialog = ({ children }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90%] max-sm:max-w-[400px] max-sm:h-[80vh] max-sm:rounded-[20px]"
+        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 sm:max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90vw] max-sm:h-[80vh] max-sm:rounded-[20px]"
       >
         {/* Header */}
         <div className="flex flex-col gap-2 p-6 border-b border-[#8F00FF] shrink-0">
@@ -43,7 +43,7 @@ const AddResultDialog = ({ children }) => {
 
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
             <h3 className="text-[18px] font-bold text-[#111827]">
               Result Information
             </h3>

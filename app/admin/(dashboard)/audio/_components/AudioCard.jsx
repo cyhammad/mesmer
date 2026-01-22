@@ -59,7 +59,10 @@ const AudioCard = ({ audio }) => {
             </button>
           </EditAudioDialog>
 
-          <DeleteAudioDialog onConfirm={() => console.log("Deleting audio...")}>
+          <DeleteAudioDialog
+            audioName={audio.title}
+            onConfirm={() => console.log("Deleting audio...")}
+          >
             <button
               className="hover:scale-105 transition-transform"
               onClick={(e) => e.stopPropagation()}

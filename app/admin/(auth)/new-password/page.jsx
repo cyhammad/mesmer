@@ -10,7 +10,7 @@ const NewPasswordPage = () => {
   return (
     <div className="w-full">
       {/* Heading */}
-      <h1 className="text-[32px] font-bold text-[#24282E] mb-10 tracking-tight text-center">
+      <h1 className="text-[40px] font-bold text-[#24282E] mb-10 tracking-tight text-center">
         New Password
       </h1>
 
@@ -19,7 +19,7 @@ const NewPasswordPage = () => {
       <form className="flex flex-col gap-2">
         {/* Password Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px]">Password</label>
+          <label className="text-[#717171] text-[16px]">Password</label>
           <input
             type="password"
             placeholder="Enter"
@@ -29,7 +29,7 @@ const NewPasswordPage = () => {
 
         {/* Confirm Password Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px]">
+          <label className="text-[#717171] text-[16px]">
             Confirm Password
           </label>
           <input

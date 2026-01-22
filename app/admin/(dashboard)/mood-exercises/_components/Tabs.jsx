@@ -2,7 +2,7 @@ import React from "react";
 
 const Tabs = ({ tabs, activeTab, onTabChange }) => {
   return (
-    <div className="flex gap-8 ml-6">
+    <div className="flex gap-8 ml-6 mb-3">
       {tabs.map((tab) => (
         <button
           key={tab}

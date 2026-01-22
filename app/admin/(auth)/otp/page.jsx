@@ -9,7 +9,7 @@ const OtpPage = () => {
   return (
     <div className="w-full">
       {/* Heading */}
-      <h1 className="text-[32px] font-bold text-[#24282E] mb-10 tracking-tight text-center">
+      <h1 className="text-[40px] font-bold text-[#24282E] mb-10 tracking-tight text-center">
         OTP
       </h1>
 
@@ -18,7 +18,7 @@ const OtpPage = () => {
       <form className="flex flex-col gap-2">
         {/* OTP Input */}
         <div className="flex flex-col gap-2">
-          <label className="text-[#717171] text-[15px]">Enter OTP</label>
+          <label className="text-[#717171] text-[16px]">Enter OTP</label>
           <input
             type="text"
             placeholder="Enter"
@@ -27,7 +27,7 @@ const OtpPage = () => {
         </div>
 
         {/* Resend Timer */}
-        <div className="mt-2 text-[15px] font-medium text-[#9D28F0] text-center w-full">
+        <div className="mt-2 text-[16px] font-medium text-[#9D28F0] text-center w-full">
           Resend 01:59
         </div>
 

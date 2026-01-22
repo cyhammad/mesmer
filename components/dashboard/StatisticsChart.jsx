@@ -41,6 +41,22 @@ const chartConfig = {
   },
 };
 
+const yTicks = [0, 50, 100, 500, 1000];
+const mapValue = (val) => {
+  if (val <= 0) return 0;
+  if (val <= 50) return (val / 50) * 1;
+  if (val <= 100) return 1 + ((val - 50) / 50) * 1;
+  if (val <= 500) return 2 + ((val - 100) / 400) * 1;
+  if (val <= 1000) return 3 + ((val - 500) / 500) * 1;
+  return 4;
+};
+
+const transformedData = data.map((d) => ({
+  ...d,
+  usersMapped: mapValue(d.users),
+  earningsMapped: mapValue(d.earnings),
+}));
+
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     const monthNames = [
@@ -58,7 +74,8 @@ const CustomTooltip = ({ active, payload, label }) => {
       "December",
     ];
     const monthIdx = parseInt(label) - 1;
-    const monthName = monthNames[monthIdx] || "March"; // Fallback for screenshot look
+    const monthName = monthNames[monthIdx] || "March";
+    const originalPayload = payload[0].payload;
 
     return (
       <div className="bg-[#1A1C1E] text-white p-3 rounded-[12px] shadow-xl border-none text-xs min-w-[140px]">
@@ -67,12 +84,14 @@ const CustomTooltip = ({ active, payload, label }) => {
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 rounded-[2px] bg-[#FF5C35]" />
             <span className="text-gray-400">New Users:</span>
-            <span className="font-medium ml-auto">{payload[0].value}</span>
+            <span className="font-medium ml-auto">{originalPayload.users}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2.5 h-2.5 rounded-[2px] bg-[#8F00FF]" />
             <span className="text-gray-400">Earnings:</span>
-            <span className="font-medium ml-auto">${payload[1].value}</span>
+            <span className="font-medium ml-auto">
+              ${originalPayload.earnings}
+            </span>
           </div>
         </div>
       </div>
@@ -83,8 +102,8 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 export function StatisticsChart() {
   return (
-    <div className="bg-white p-6 lg:p-5 rounded-[20px] border border-[#EED9FF]">
-      <div className="flex justify-between items-center mb-8">
+    <div className="bg-white p-4 rounded-[16px] border border-[#EED9FF] w-full h-[377px] flex flex-col gap-[16px]">
+      <div className="flex justify-between items-center">
         <h3
           className="text-xl font-semibold text-[#1A1A1A]"
           style={{ fontFamily: "var(--font-nunito-sans)" }}
@@ -95,11 +114,11 @@ export function StatisticsChart() {
           Year 2025 <span className="text-[10px]">▼</span>
         </button>
       </div>
-      <div className="h-[350px] w-full">
+      <div className="flex-1 w-full min-h-0">
         <ChartContainer config={chartConfig} className="h-full w-full">
           <LineChart
-            data={data}
-            margin={{ top: 5, right: 10, left: -20, bottom: 0 }}
+            data={transformedData}
+            margin={{ top: 25, right: 10, left: 0, bottom: 20 }}
           >
             <CartesianGrid
               vertical={false}
@@ -116,15 +135,18 @@ export function StatisticsChart() {
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#A0A0A0", fontSize: 12 }}
-              ticks={[0, 50, 100, 500, 1000]}
-              domain={[0, 1000]}
-              dx={-10}
+              tick={{ fill: "#A0A0A0", fontSize: 12, textAnchor: "start" }}
+              ticks={[0, 1, 2, 3, 4]}
+              tickFormatter={(v) => yTicks[v]}
+              domain={[0, 4]}
+              interval={0}
+              dx={-45}
+              dy={14}
             />
             <ChartTooltip content={<CustomTooltip />} />
             <Line
               type="monotone"
-              dataKey="users"
+              dataKey="usersMapped"
               stroke="var(--color-users)"
               strokeWidth={3}
               dot={false}
@@ -137,7 +159,7 @@ export function StatisticsChart() {
             />
             <Line
               type="monotone"
-              dataKey="earnings"
+              dataKey="earningsMapped"
               stroke="var(--color-earnings)"
               strokeWidth={3}
               dot={false}

@@ -10,15 +10,15 @@ const SignInPage = () => {
   return (
     <div className="w-full">
       {/* Heading */}
-      <h1 className="text-[32px] font-bold text-[#24282E] mb-10 tracking-tight text-center">
+      <h1 className="text-[40px] font-bold text-[#24282E] mb-8 tracking-tight text-center">
         Sign In
       </h1>
 
-      <h2 className="text-xl font-medium mb-4 text-left">Enter your details</h2>
+      <h2 className="text-xl font-[500] mb-3 text-left">Enter your details</h2>
 
-      <form className="flex flex-col gap-2">
+      <form className="flex flex-col gap-1">
         {/* Email Input */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <label className="text-[#717171] text-[15px]">Email</label>
           <input
             type="email"
@@ -28,7 +28,7 @@ const SignInPage = () => {
         </div>
 
         {/* Password Input */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <label className="text-[#717171] text-[15px]">Password</label>
           <input
             type="password"
@@ -40,7 +40,7 @@ const SignInPage = () => {
         {/* Forgot Password Link */}
         <Link
           href="/admin/forget-password"
-          className="text-[#9D28F0] pl-[14px] mt-2 font-medium text-[14px] hover:text-[#8b2ef0] transition-colors"
+          className="text-[#9D28F0] pl-[14px] mt-1 font-medium text-[14px] hover:text-[#8b2ef0] transition-colors"
         >
           Forgot Password?
         </Link>

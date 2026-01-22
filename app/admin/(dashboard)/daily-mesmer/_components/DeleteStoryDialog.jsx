@@ -9,7 +9,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { CloseCircleIcon } from "./Icons";
 
-const DeleteStoryDialog = ({ children, onConfirm }) => {
+const DeleteStoryDialog = ({ children, onConfirm, storyContent }) => {
+  const storySnippet = storyContent
+    ? storyContent.substring(0, 30) + (storyContent.length > 30 ? "..." : "")
+    : null;
+
   return (
     <Dialog>
       <DialogTrigger asChild onClick={(e) => e.stopPropagation()}>
@@ -24,10 +28,11 @@ const DeleteStoryDialog = ({ children, onConfirm }) => {
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
             <DialogTitle className="text-[18px] sm:text-[20px] font-bold text-[#111827]">
-              Delete Exercise
+              Delete Story
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete the exercise?
+              Are you sure you want to delete{" "}
+              {storySnippet ? <strong>"{storySnippet}"</strong> : "this story"}?
             </p>
           </div>
           <DialogClose className="outline-none">

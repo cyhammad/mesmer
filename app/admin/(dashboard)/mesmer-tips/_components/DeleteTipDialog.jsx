@@ -9,7 +9,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { CloseCircleIcon } from "./Icons";
 
-const DeleteTipDialog = ({ children, onConfirm }) => {
+const DeleteTipDialog = ({ children, onConfirm, tipContent }) => {
+  const tipSnippet = tipContent
+    ? tipContent.substring(0, 30) + (tipContent.length > 30 ? "..." : "")
+    : null;
+
   return (
     <Dialog>
       <DialogTrigger asChild onClick={(e) => e.stopPropagation()}>
@@ -27,7 +31,8 @@ const DeleteTipDialog = ({ children, onConfirm }) => {
               Delete Tip
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete the tip?
+              Are you sure you want to delete{" "}
+              {tipSnippet ? <strong>"{tipSnippet}"</strong> : "the tip"}?
             </p>
           </div>
           <DialogClose className="outline-none">

@@ -54,8 +54,8 @@ const VideoCard = ({ video }) => {
           </div>
         </div>
 
-        {/* Actions - Bottom Right - always visible on mobile */}
-        <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 flex items-center gap-1 sm:gap-2 sm:opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 backdrop-blur-sm pl-1 sm:pl-2 rounded-lg">
+        {/* Actions - Bottom Right */}
+        <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 flex items-center gap-1 sm:gap-2 transition-opacity bg-white/90 backdrop-blur-sm pl-1 sm:pl-2 rounded-lg py-1 pr-1">
           <EditVideoDialog video={video}>
             <button
               className="p-1 hover:bg-purple-50 rounded-lg transition-colors"
@@ -65,7 +65,10 @@ const VideoCard = ({ video }) => {
             </button>
           </EditVideoDialog>
 
-          <DeleteVideoDialog onConfirm={() => console.log("Deleting video...")}>
+          <DeleteVideoDialog
+            videoName={video.title}
+            onConfirm={() => console.log("Deleting video...")}
+          >
             <button
               className="p-1 hover:bg-red-50 rounded-lg transition-colors"
               onClick={(e) => e.stopPropagation()}

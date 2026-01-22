@@ -12,10 +12,22 @@ import { CheckmarkIcon } from "./Icons";
 import { cn } from "@/lib/utils";
 
 const Label = ({ children, required }) => (
-  <label className="text-[12px] font-medium text-[#717171] mb-1.5 block font-medium">
+  <label
+    className="text-[12px] font-medium text-[#717171] mb-1.5 block font-medium"
+    style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
+  >
     {children}
     {required && <span className="text-[#8F00FF] ml-1">*</span>}
   </label>
+);
+
+const TextArea = ({ value, placeholder }) => (
+  <textarea
+    defaultValue={value}
+    placeholder={placeholder}
+    className="w-full h-[144px] rounded-[10px] border border-[#E5E7EB] p-3 text-[14px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
+    style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
+  />
 );
 
 const Input = ({ value, placeholder, type = "text" }) => (
@@ -29,20 +41,12 @@ const Input = ({ value, placeholder, type = "text" }) => (
   </div>
 );
 
-const TextArea = ({ value, placeholder }) => (
-  <textarea
-    defaultValue={value}
-    placeholder={placeholder}
-    className="w-full h-[144px] rounded-[10px] border border-[#E5E7EB] p-3 text-[14px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
-  />
-);
-
 const CategoryChip = ({ name, isSelected, onClick }) => (
   <button
     type="button"
     onClick={onClick}
     className={cn(
-      "px-3 py-1.5 rounded-[10px] text-[12px] font-medium transition-all flex items-center gap-1.5",
+      "px-3 py-2 rounded-[12px] text-[14px] font-medium transition-all flex items-center gap-4",
       isSelected
         ? "bg-white text-[#111827] border border-[#8F00FF]"
         : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30",
@@ -50,8 +54,8 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
   >
     {name}
     {isSelected && (
-      <div className="w-3.5 h-3.5 rounded-full bg-[#8F00FF] flex items-center justify-center">
-        <CheckmarkIcon className="w-2 h-2" />
+      <div className="w-4 h-4 rounded-full bg-[#8F00FF] flex items-center justify-center translate-y-[1px]">
+        <CheckmarkIcon className="w-2.5 h-2.5" />
       </div>
     )}
   </button>
@@ -74,7 +78,7 @@ const ScheduleTipDialog = ({ children }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[460px] w-[90%] p-0 gap-0 h-auto max-h-[90vh] flex flex-col bg-white rounded-[12px] overflow-hidden border-none outline-none shadow-2xl"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[570px] p-0 gap-0 max-h-[90vh] flex flex-col bg-white rounded-[12px] overflow-hidden border-none outline-none shadow-2xl max-sm:w-[90vw]"
       >
         {/* Header */}
         <div className="flex justify-between items-center p-4 sm:p-5 border-b border-[#F3F4F6] shrink-0">
@@ -87,7 +91,7 @@ const ScheduleTipDialog = ({ children }) => {
         </div>
 
         {/* Content */}
-        <div className="p-4 sm:p-5 flex-1 sm:flex-none overflow-y-auto flex flex-col">
+        <div className="px-4 py-2 flex-1 sm:flex-none overflow-y-auto flex flex-col">
           <div>
             <Label>Enter your tip</Label>
             <TextArea placeholder="Brief description" />
@@ -95,7 +99,7 @@ const ScheduleTipDialog = ({ children }) => {
 
           <div>
             <Label required>Category</Label>
-            <div className="flex flex-wrap gap-2 mt-1.5">
+            <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <CategoryChip
                   key={cat}
@@ -107,7 +111,7 @@ const ScheduleTipDialog = ({ children }) => {
             </div>
           </div>
 
-          <div>
+          <div className="mt-2">
             <Label>Add Date</Label>
             <Input placeholder="DD/MM/YYYY" />
           </div>

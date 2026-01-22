@@ -65,14 +65,17 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
 const MediaPlaceholder = ({ label, fileName, onRemove }) => (
   <div className="flex flex-col gap-1">
     <Label>{label}</Label>
-    <div className="w-full h-[56px] bg-white rounded-[12px] flex items-center px-4 justify-between border border-[#E5E7EB] hover:border-[#8F00FF]/30 transition-all">
+    <div className="w-full h-[56px] bg-[#F3E8FF] rounded-[8px] flex items-center px-4 justify-between border border-transparent cursor-pointer hover:border-[#8F00FF]/30 transition-all">
       <span className="text-[#111827] text-[14px]">{fileName}</span>
-      <button
-        onClick={onRemove}
-        className="text-[#8F00FF] hover:bg-purple-50 p-2 rounded-full transition-colors"
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          onRemove();
+        }}
+        className="w-8 h-8 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-transform"
       >
         <TrashIcon className="w-5 h-5" />
-      </button>
+      </div>
     </div>
   </div>
 );
@@ -81,7 +84,6 @@ const EditVideoDialog = ({ children, video }) => {
   const [selectedCategory, setSelectedCategory] = useState(
     video?.category || "School & Exams",
   );
-  const [selectedMood, setSelectedMood] = useState(video?.mood || "Confident");
 
   const categories = [
     "School & Exams",
@@ -90,9 +92,6 @@ const EditVideoDialog = ({ children, video }) => {
     "Social Media",
     "Self-Esteem & Body Image",
     "Stress & Overthinking",
-  ];
-
-  const moods = [
     "Confident",
     "Calm",
     "Motivated",
@@ -106,34 +105,33 @@ const EditVideoDialog = ({ children, video }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90%] max-sm:max-w-[400px] max-sm:h-[80vh] max-sm:rounded-[20px]"
+        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 sm:max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90vw] max-sm:h-[80vh] max-sm:rounded-[20px]"
       >
         {/* Header */}
-        <div className="flex flex-col gap-2 p-4 sm:p-6 border-b border-[#EED9FF] shrink-0">
+        <div className="flex flex-col gap-2 p-6 border-b border-[#8F00FF] shrink-0">
           <DialogClose className="outline-none">
             <BackArrow className="flex justify-start w-6 h-6 cursor-pointer" />
           </DialogClose>
-          <DialogTitle className="flex justify-start text-[20px] sm:text-[24px] font-bold text-[#111827]">
+          <DialogTitle className="flex justify-start text-[24px] font-bold text-[#111827]">
             Edit Video
           </DialogTitle>
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 scrollbar-hide">
-          <div className="flex flex-col gap-6">
+        <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-[18px] font-bold text-[#111827]">Basics</h3>
+
             <div>
               <Label>Title</Label>
               <Input placeholder="Enter" value={video?.title} />
             </div>
 
             <div>
-              <Label>
-                Description{" "}
-                <span className="text-[#9CA3AF] font-normal">(Optional)</span>
-              </Label>
+              <Label>Description</Label>
               <TextArea
                 placeholder="Brief description of the video"
-                rows={6}
+                rows={4}
                 value={
                   video?.description ||
                   "I remember once getting home after a long day and forgetting to take my bag off straight away. Just wandered round the kitchen with it still on my back. Took me a few minutes to even realise why I felt so tired. Sometimes you don't even notice the weight you're carrying until you finally let it drop."
@@ -141,14 +139,8 @@ const EditVideoDialog = ({ children, video }) => {
               />
             </div>
 
-            <MediaPlaceholder
-              label="Thumbnail Image (Optional)"
-              fileName="First love.mp3"
-              onRemove={() => console.log("Remove thumbnail")}
-            />
-
             <div>
-              <Label>Category</Label>
+              <Label required>Category</Label>
               <div className="flex flex-wrap gap-3 mt-2">
                 {categories.map((cat) => (
                   <CategoryChip
@@ -161,33 +153,33 @@ const EditVideoDialog = ({ children, video }) => {
               </div>
             </div>
 
-            <div>
-              <Label>Mood</Label>
-              <div className="flex flex-wrap gap-3 mt-2">
-                {moods.map((mood) => (
-                  <CategoryChip
-                    key={mood}
-                    name={mood}
-                    isSelected={selectedMood === mood}
-                    onClick={() => setSelectedMood(mood)}
-                  />
-                ))}
-              </div>
+            <div className="mt-2 flex flex-col gap-4">
+              <MediaPlaceholder
+                label="Thumbnail Image (Optional)"
+                fileName="First love.mp3"
+                onRemove={() => console.log("Remove thumbnail")}
+              />
+
+              <MediaPlaceholder
+                label="Video File (.mp4)"
+                fileName={video?.fileName || "Choose File"}
+                onRemove={() => console.log("Remove video file")}
+              />
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-4 sm:p-6 border-t border-[#F3F4F6] shrink-0 flex gap-3 sm:gap-4 bg-white">
+        <div className="p-6 border-t border-[#F3F4F6] shrink-0 flex gap-4 bg-white">
           <DialogClose asChild>
             <Button
               variant="outline"
-              className="w-full sm:w-[110px] h-[44px] sm:h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] sm:text-[16px] font-bold"
+              className="w-[110px] h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[16px] font-bold"
             >
               Cancel
             </Button>
           </DialogClose>
-          <Button className="flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold">
+          <Button className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold">
             Update Video
           </Button>
         </div>

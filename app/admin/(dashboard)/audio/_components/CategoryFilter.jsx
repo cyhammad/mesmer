@@ -9,18 +9,30 @@ const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => {
           return (
             <button
               key={cat.name}
-              onClick={() => onCategoryChange(cat.name)}
-              className={`flex min-w-fit h-[48px] items-center gap-6 px-4 py-2 rounded-[16px] border text-[15px] font-bold transition-all whitespace-nowrap ${
+              onClick={() => onCategoryChange(isActive ? null : cat.name)}
+              className={`flex min-w-fit h-[38px] items-center gap-[10px] px-[12px] py-[8px] rounded-[12px] border transition-all whitespace-nowrap ${
                 isActive
-                  ? "bg-white border-[#EED9FF] text-black"
+                  ? "bg-[#F3E8FF] border-[#8F00FF] text-[#8F00FF]"
                   : "bg-white border-gray-200 text-black hover:border-gray-300"
               }`}
+              style={{
+                fontFamily: "'Bricolage Grotesque', sans-serif",
+                fontWeight: 600,
+                fontSize: "12px",
+                lineHeight: "16px",
+              }}
             >
-              {cat.name}
+              <span className="flex-1 text-left truncate">{cat.name}</span>
               <span
                 className={`flex items-center justify-center min-w-[25px] h-[25px] rounded-md text-[14px] font-medium ${
-                  isActive ? " text-black" : " text-black"
+                  isActive ? "bg-[#8F00FF] text-white" : "text-black"
                 }`}
+                style={{
+                  fontFamily: "'Bricolage Grotesque', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  lineHeight: "14px",
+                }}
               >
                 {cat.count}
               </span>

@@ -4,8 +4,8 @@ import AddStoryDialog from "./AddStoryDialog";
 const PageHeader = ({ title, subtitle, DialogWrapper = AddStoryDialog }) => {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-      <div className="space-y-1 sm:space-y-3">
-        <h1 className="text-[22px] sm:text-[28px] font-bold text-[#1A1A1A]">
+      <div className="space-y-2">
+        <h1 className="text-[22px] tracking-tight sm:text-[28px] font-bold text-[#1A1A1A]">
           {title}
         </h1>
         <p className="text-[#6C6C6C] font-normal text-[14px] sm:text-[20px]">

@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { CloseCircleIcon } from "./Icons";
 
-const DeleteVideoDialog = ({ children, onConfirm }) => {
+const DeleteVideoDialog = ({ children, onConfirm, videoName }) => {
   return (
     <Dialog>
       <DialogTrigger asChild onClick={(e) => e.stopPropagation()}>
@@ -27,7 +27,8 @@ const DeleteVideoDialog = ({ children, onConfirm }) => {
               Delete Video Content
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete this video file?
+              Are you sure you want to delete{" "}
+              {videoName ? <strong>{videoName}</strong> : "this video file"}?
             </p>
           </div>
           <DialogClose className="outline-none">

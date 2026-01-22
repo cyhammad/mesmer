@@ -65,16 +65,17 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
 const MediaPlaceholder = ({ label, icon, placeholder = "Choose File" }) => (
   <div className="flex flex-col gap-1">
     <Label>{label}</Label>
-    <div className="w-full h-[56px] bg-white rounded-[12px] flex items-center px-4 justify-between border border-[#E5E7EB] cursor-pointer hover:border-[#8F00FF]/30 transition-all">
+    <div className="w-full h-[56px] bg-[#F3E8FF] rounded-[8px] flex items-center px-4 justify-between border border-transparent cursor-pointer hover:border-[#8F00FF]/30 transition-all">
       <span className="text-[#999DA0] text-[14px]">{placeholder}</span>
-      <div className="w-8 h-8 flex items-center justify-center">{icon}</div>
+      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+        {icon}
+      </div>
     </div>
   </div>
 );
 
 const AddAudioDialog = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState("School & Exams");
-  const [selectedMood, setSelectedMood] = useState("Confident");
 
   const categories = [
     "School & Exams",
@@ -83,9 +84,6 @@ const AddAudioDialog = ({ children }) => {
     "Social Media",
     "Self-Esteem & Body Image",
     "Stress & Overthinking",
-  ];
-
-  const moods = [
     "Confident",
     "Calm",
     "Motivated",
@@ -99,10 +97,10 @@ const AddAudioDialog = ({ children }) => {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90%] max-sm:max-w-[400px] max-sm:h-[80vh] max-sm:rounded-[20px]"
+        className="fixed right-6 left-auto top-1/2 -translate-y-1/2 translate-x-0 sm:max-w-[562px] w-full p-0 gap-0 h-[calc(100vh-48px)] flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:w-[90vw] max-sm:h-[80vh] max-sm:rounded-[20px]"
       >
         {/* Header */}
-        <div className="flex flex-col gap-2 p-6 border-b border-[#EED9FF] shrink-0">
+        <div className="flex flex-col gap-2 p-6 border-b border-[#8F00FF] shrink-0">
           <DialogClose className="outline-none">
             <BackArrow className="flex justify-start w-6 h-6 cursor-pointer" />
           </DialogClose>
@@ -113,35 +111,24 @@ const AddAudioDialog = ({ children }) => {
 
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <h3 className="text-[18px] font-bold text-[#111827]">Basics</h3>
+
             <div>
-              <Label>Title</Label>
+              <Label required>Title</Label>
               <Input placeholder="Enter" />
             </div>
 
             <div>
-              <Label>
-                Description{" "}
-                <span className="text-[#9CA3AF] font-normal">(Optional)</span>
-              </Label>
+              <Label>Description</Label>
               <TextArea
                 placeholder="Brief description of the exercise"
                 rows={4}
               />
             </div>
 
-            <MediaPlaceholder
-              label="Thumbnail Image"
-              icon={<CloudUploadIcon className="w-6 h-6" />}
-            />
-
-            <MediaPlaceholder
-              label="Audio File (.mp3)"
-              icon={<CloudUploadIcon className="w-6 h-6" />}
-            />
-
             <div>
-              <Label>Category</Label>
+              <Label required>Category</Label>
               <div className="flex flex-wrap gap-3 mt-2">
                 {categories.map((cat) => (
                   <CategoryChip
@@ -154,18 +141,16 @@ const AddAudioDialog = ({ children }) => {
               </div>
             </div>
 
-            <div>
-              <Label>Mood</Label>
-              <div className="flex flex-wrap gap-3 mt-2">
-                {moods.map((mood) => (
-                  <CategoryChip
-                    key={mood}
-                    name={mood}
-                    isSelected={selectedMood === mood}
-                    onClick={() => setSelectedMood(mood)}
-                  />
-                ))}
-              </div>
+            <div className="mt-2 flex flex-col gap-4">
+              <MediaPlaceholder
+                label="Thumbnail Image"
+                icon={<CloudUploadIcon className="w-5 h-5" />}
+              />
+
+              <MediaPlaceholder
+                label="Audio File (.mp3)"
+                icon={<CloudUploadIcon className="w-5 h-5" />}
+              />
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { CloseCircleIcon } from "./Icons";
 
-const DeleteAudioDialog = ({ children, onConfirm }) => {
+const DeleteAudioDialog = ({ children, onConfirm, audioName }) => {
   return (
     <Dialog>
       <DialogTrigger asChild onClick={(e) => e.stopPropagation()}>
@@ -27,7 +27,8 @@ const DeleteAudioDialog = ({ children, onConfirm }) => {
               Delete Audio Content
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete this audio file?
+              Are you sure you want to delete{" "}
+              {audioName ? <strong>{audioName}</strong> : "this audio file"}?
             </p>
           </div>
           <DialogClose className="outline-none">
