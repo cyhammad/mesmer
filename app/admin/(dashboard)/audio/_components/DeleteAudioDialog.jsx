@@ -42,6 +42,9 @@ const DeleteAudioDialog = ({ children, onConfirm, audioName }) => {
             <Button
               variant="outline"
               className="w-full sm:w-[110px] h-[44px] sm:h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] sm:text-[16px] font-bold"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
             >
               Cancel
             </Button>
@@ -50,6 +53,9 @@ const DeleteAudioDialog = ({ children, onConfirm, audioName }) => {
             className="w-full sm:flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold"
             onClick={() => {
               if (onConfirm) onConfirm();
+            }}
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
             }}
           >
             Yes Delete

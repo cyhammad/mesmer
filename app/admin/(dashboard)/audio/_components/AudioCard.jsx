@@ -29,7 +29,7 @@ const AudioCard = ({ audio }) => {
       {/* Content */}
       <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5 h-full">
         <div>
-          <h3 className="text-[#1A1A1A] text-[15px] sm:text-[18px] font-bold leading-tight truncate">
+          <h3 className="text-[#1A1A1A] text-[15px] sm:text-[18px] leading-tight truncate">
             {audio.title}
           </h3>
           <p

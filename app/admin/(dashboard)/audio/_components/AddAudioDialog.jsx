@@ -164,11 +164,19 @@ const AddAudioDialog = ({ children }) => {
             <Button
               variant="outline"
               className="w-[110px] h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[16px] font-bold"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
             >
               Cancel
             </Button>
           </DialogClose>
-          <Button className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold">
+          <Button
+            className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold"
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
             Create Audio
           </Button>
         </div>

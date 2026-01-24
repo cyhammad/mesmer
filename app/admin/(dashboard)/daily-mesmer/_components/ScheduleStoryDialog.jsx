@@ -125,11 +125,19 @@ const ScheduleStoryDialog = ({ children }) => {
               <Button
                 variant="outline"
                 className="w-full sm:w-[107px] h-[54px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[18px] font-bold"
+                style={{
+                  fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+                }}
               >
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="w-full sm:w-[194px] h-[54px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[18px] font-bold whitespace-nowrap">
+            <Button
+              className="w-full sm:w-[194px] h-[54px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[18px] font-bold whitespace-nowrap"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
               Schedule Now
             </Button>
           </div>

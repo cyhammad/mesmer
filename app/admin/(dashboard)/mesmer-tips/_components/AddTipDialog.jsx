@@ -104,7 +104,12 @@ const AddTipDialog = ({ children }) => {
 
         <div className="px-4 max-w-[570px] w-full py-5 border-t border-[#F3F4F6] flex sm:flex-row items-center justify-between gap-3 bg-white shrink-0">
           <ScheduleTipDialog>
-            <button className="text-[#8F00FF] text-[18px] font-bold hover:underline whitespace-nowrap">
+            <button
+              className="text-[#8F00FF] text-[18px] font-bold hover:underline whitespace-nowrap"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
               Schedule for Later
             </button>
           </ScheduleTipDialog>
@@ -113,11 +118,19 @@ const AddTipDialog = ({ children }) => {
             <Button
               variant="outline"
               className="h-[54px] w-[107px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[18px] font-bold"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
             >
               Cancel
             </Button>
           </DialogClose>
-          <Button className="h-[54px] w-[194px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[18px] font-bold whitespace-nowrap">
+          <Button
+            className="h-[54px] w-[194px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[18px] font-bold whitespace-nowrap"
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
             Add Tip for Today
           </Button>
         </div>

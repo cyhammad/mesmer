@@ -61,7 +61,12 @@ const AddResultDialog = ({ children }) => {
 
         {/* Footer */}
         <div className="p-6 border-t border-[#F3F4F6] shrink-0 flex flex-col gap-6 bg-white items-center">
-          <button className="text-[#8F00FF] text-[16px] font-bold hover:underline">
+          <button
+            className="text-[#8F00FF] text-[16px] font-bold hover:underline"
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
             Save to Drafts
           </button>
 
@@ -70,11 +75,19 @@ const AddResultDialog = ({ children }) => {
               <Button
                 variant="outline"
                 className="w-[110px] h-[52px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[16px] font-bold"
+                style={{
+                  fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+                }}
               >
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold">
+            <Button
+              className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
               Make it Live
             </Button>
           </div>

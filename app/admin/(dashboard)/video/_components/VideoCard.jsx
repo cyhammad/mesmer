@@ -30,7 +30,7 @@ const VideoCard = ({ video }) => {
       {/* Content Area */}
       <div className="flex-1 p-2 sm:p-3 flex flex-col gap-1 sm:gap-1.5 relative">
         <div className="flex justify-between items-start">
-          <h3 className="text-[#1A1A1A] text-[15px] sm:text-[18px] font-bold truncate pr-2">
+          <h3 className="text-[#1A1A1A] text-[15px] sm:text-[18px] font-medium truncate pr-2">
             {video.title}
           </h3>
           <span className="text-[#8F00FF] text-[13px] sm:text-[16px] font-medium shrink-0">
@@ -50,7 +50,7 @@ const VideoCard = ({ video }) => {
         {/* Metadata section */}
         <div className="mt-auto space-y-0.5 sm:space-y-1">
           <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-[12px]">
-            <span className="text-[#8F00FF] font-bold shrink-0">Category:</span>
+            <span className="text-[#8F00FF] font-medium shrink-0">Category:</span>
             <span
               className="text-[#717171] truncate tracking-tight"
               style={{
@@ -61,7 +61,7 @@ const VideoCard = ({ video }) => {
             </span>
           </div>
           <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-[12px]">
-            <span className="text-[#8F00FF] font-bold shrink-0">Mood:</span>
+            <span className="text-[#8F00FF] font-medium shrink-0">Mood:</span>
             <span
               className="text-[#717171] truncate tracking-tight"
               style={{
