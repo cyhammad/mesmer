@@ -11,7 +11,10 @@ import { BackArrow, TrashIconWhite } from "./Icons";
 import AddResultDialog from "./AddResultDialog";
 
 const Label = ({ children, required }) => (
-  <label className="text-[14px] font-medium text-[#717171] mb-2 block">
+  <label
+    className="text-[14px] font-medium text-[#717171] mb-2 block"
+    style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
+  >
     {children}
     {required && <span className="text-[#8F00FF] ml-1">*</span>}
   </label>

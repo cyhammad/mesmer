@@ -9,9 +9,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { BackArrow } from "./Icons";
 
-const Label = ({ children }) => (
-  <label className="text-[14px] font-medium text-[#717171] mb-2 block">
+const Label = ({ children, required }) => (
+  <label
+    className="text-[14px] font-medium text-[#717171] mb-2 block"
+    style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
+  >
     {children}
+    {required && <span className="text-[#8F00FF] ml-1">*</span>}
   </label>
 );
 

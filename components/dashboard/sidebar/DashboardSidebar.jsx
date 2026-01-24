@@ -67,7 +67,10 @@ const SidebarNav = ({ currentPath, onNavigate }) => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col h-full justify-between">
+    <div
+      className="flex flex-col h-full justify-between"
+      style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
+    >
       <div className="flex flex-col w-full">
         <div className="mb-8 flex items-center justify-center">
           <Image

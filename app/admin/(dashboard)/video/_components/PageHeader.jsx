@@ -8,7 +8,12 @@ const PageHeader = ({ title, subtitle, DialogWrapper = AddVideoDialog }) => {
         <h1 className="text-[22px] sm:text-[28px] font-bold text-[#1A1A1A]">
           {title}
         </h1>
-        <p className="text-[#6C6C6C] font-normal text-[14px] sm:text-[20px]">
+        <p
+          className="text-[#6C6C6C] font-normal text-[14px] sm:text-[20px] tracking-tight"
+          style={{
+            fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+          }}
+        >
           {subtitle}
         </p>
       </div>

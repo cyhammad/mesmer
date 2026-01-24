@@ -8,7 +8,12 @@ const PageHeader = ({ title, subtitle, onAddClick }) => {
         <h1 className="text-[28px] tracking-tight font-bold text-[#1A1A1A]">
           {title}
         </h1>
-        <p className="text-[#6C6C6C] font-normal text-[20px]">
+        <p
+          className="text-[#6C6C6C] font-normal text-[20px] tracking-tight"
+          style={{
+            fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+          }}
+        >
           {subtitle}
         </p>
       </div>

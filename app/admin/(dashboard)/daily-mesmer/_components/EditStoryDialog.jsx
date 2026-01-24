@@ -39,7 +39,7 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
     className={cn(
       "px-3 py-2 rounded-[12px] text-[14px] font-medium transition-all flex items-center gap-4",
       isSelected
-        ? "bg-white text-[#111827] border border-[#8F00FF]"
+        ? "bg-[#F3E8FF] text-[#8F00FF] border border-[#8F00FF]"
         : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30",
     )}
   >
@@ -106,24 +106,18 @@ const EditStoryDialog = ({ children, story }) => {
         </div>
 
         {/* Footer */}
-        <div className="p-4 sm:p-5 border-t border-[#F3F4F6] flex flex-col sm:flex-row items-center sm:justify-between gap-3 bg-white shrink-0">
-          <ScheduleStoryDialog>
-            <button className="text-[#8F00FF] text-[12px] font-bold hover:underline whitespace-nowrap order-2 sm:order-1">
-              Reschedule
-            </button>
-          </ScheduleStoryDialog>
-
-          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
+        <div className="px-4 max-w-[570px] w-full py-5 border-t border-[#F3F4F6] flex sm:flex-row items-center justify-end gap-3 bg-white shrink-0">
+          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
             <DialogClose asChild>
               <Button
                 variant="outline"
-                className="w-full sm:w-[80px] h-[42px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] font-bold"
+                className="w-full sm:w-[107px] h-[54px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[18px] font-bold"
               >
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="w-full sm:w-auto h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
-              Save Changes
+            <Button className="w-full sm:w-[194px] h-[54px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[18px] font-bold whitespace-nowrap">
+              Update Story
             </Button>
           </div>
         </div>

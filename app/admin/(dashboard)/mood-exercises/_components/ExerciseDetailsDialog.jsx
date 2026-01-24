@@ -16,7 +16,10 @@ import {
 } from "./Icons"; // Assuming I fix the icons file or inline it
 
 const Label = ({ children }) => (
-  <label className="text-[14px] font-medium text-[#717171] mb-2 block">
+  <label
+    className="text-[14px] font-medium text-[#717171] mb-2 block"
+    style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
+  >
     {children}
   </label>
 );

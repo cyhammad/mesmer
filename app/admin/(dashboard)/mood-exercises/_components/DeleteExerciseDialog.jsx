@@ -51,7 +51,7 @@ const DeleteExerciseDialog = ({ children, onConfirm }) => {
               if (onConfirm) onConfirm();
             }}
           >
-            Delete
+            Yes Delete
           </Button>
         </div>
       </DialogContent>

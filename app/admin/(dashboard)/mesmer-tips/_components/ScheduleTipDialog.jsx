@@ -37,6 +37,7 @@ const Input = ({ value, placeholder, type = "text" }) => (
       defaultValue={value}
       placeholder={placeholder}
       className="w-full h-[42px] rounded-[10px] border border-[#E5E7EB] px-3 text-[14px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+      style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
     />
   </div>
 );
@@ -48,7 +49,7 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
     className={cn(
       "px-3 py-2 rounded-[12px] text-[14px] font-medium transition-all flex items-center gap-4",
       isSelected
-        ? "bg-white text-[#111827] border border-[#8F00FF]"
+        ? "bg-[#F3E8FF] text-[#8F00FF] border border-[#8F00FF]"
         : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30",
     )}
   >

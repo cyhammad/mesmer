@@ -49,7 +49,13 @@ const TipCard = ({ tip }) => {
       {/* Card Footer */}
       <div className="flex items-center gap-2 text-[#6C6C6C] text-[14px] font-medium mt-auto">
         <CalendarIcon className="w-5 h-5" />
-        <span>{tip.date}</span>
+        <span
+          style={{
+            fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+          }}
+        >
+          {tip.date}
+        </span>
       </div>
     </div>
   );

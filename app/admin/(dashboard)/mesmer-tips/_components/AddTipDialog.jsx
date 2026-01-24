@@ -38,7 +38,7 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
     className={cn(
       "px-3 py-2 rounded-[12px] text-[14px] font-medium transition-all flex items-center gap-4",
       isSelected
-        ? "bg-white text-[#111827] border border-[#8F00FF]"
+        ? "bg-[#F3E8FF] text-[#8F00FF] border border-[#8F00FF]"
         : "bg-[#F3E8FF] text-[#6B7280] border border-transparent hover:border-[#8F00FF]/30",
     )}
   >
