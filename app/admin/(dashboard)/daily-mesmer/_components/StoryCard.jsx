@@ -36,7 +36,12 @@ const StoryCard = ({ story }) => {
 
       {/* Content Box */}
       <div className="bg-[#F3E8FF] h-fit rounded-[16px] p-3 flex flex-col items-start justify-start overflow-hidden">
-        <p className="text-[#6C6C6C] text-[16px] leading-tight">
+        <p
+          className="text-[#6C6C6C] text-[16px] tracking-tight"
+          style={{
+            fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+          }}
+        >
           {story.content}
         </p>
       </div>

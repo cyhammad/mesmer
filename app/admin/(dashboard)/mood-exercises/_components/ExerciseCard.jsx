@@ -40,10 +40,20 @@ const ExerciseCard = ({ exercise, isDraft }) => {
 
         {/* Inner Content Box */}
         <div className="bg-[#F3E8FF] rounded-[12px] p-4 flex-1 flex flex-col justify-center">
-          <p className="text-[14px] font-normal text-[#6C6C6C] mb-2 flex items-center gap-2">
+          <p
+            className="text-[14px] font-normal text-[#6C6C6C] mb-2 flex items-center gap-2 tracking-tight"
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
             <span className="w-4 h-[1px] bg-[#6C6C6C]" /> {exercise.subtitle}
           </p>
-          <h3 className="text-black text-[18px] font-medium leading-[1.2] line-clamp-2">
+          <h3
+            className="text-black text-[18px] font-medium leading-[1.2] line-clamp-2 tracking-tight"
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
             {exercise.title}
           </h3>
         </div>

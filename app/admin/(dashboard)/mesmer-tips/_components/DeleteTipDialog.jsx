@@ -31,8 +31,7 @@ const DeleteTipDialog = ({ children, onConfirm, tipContent }) => {
               Delete Tip
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete{" "}
-              {tipSnippet ? <strong>"{tipSnippet}"</strong> : "the tip"}?
+              Are you sure you want to delete this tip?
             </p>
           </div>
           <DialogClose className="outline-none">

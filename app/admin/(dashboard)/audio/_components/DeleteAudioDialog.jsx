@@ -27,7 +27,8 @@ const DeleteAudioDialog = ({ children, onConfirm, audioName }) => {
               Delete &quot;{audioName}&quot;
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete this audio content?
+              Are you sure you want to delete &quot;{audioName}&quot; audio
+              content?
             </p>
           </div>
           <DialogClose className="outline-none">

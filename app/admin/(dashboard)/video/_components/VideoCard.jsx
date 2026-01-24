@@ -38,7 +38,12 @@ const VideoCard = ({ video }) => {
           </span>
         </div>
 
-        <p className="text-[#717171] text-[12px] sm:text-[14px] truncate">
+        <p
+          className="text-[#717171] text-[12px] sm:text-[14px] truncate tracking-tight"
+          style={{
+            fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+          }}
+        >
           {video.description}
         </p>
 
@@ -46,11 +51,25 @@ const VideoCard = ({ video }) => {
         <div className="mt-auto space-y-0.5 sm:space-y-1">
           <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-[12px]">
             <span className="text-[#8F00FF] font-bold shrink-0">Category:</span>
-            <span className="text-[#717171] truncate">{video.categories}</span>
+            <span
+              className="text-[#717171] truncate tracking-tight"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
+              {video.categories}
+            </span>
           </div>
           <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-[12px]">
             <span className="text-[#8F00FF] font-bold shrink-0">Mood:</span>
-            <span className="text-[#717171] truncate">{video.moods}</span>
+            <span
+              className="text-[#717171] truncate tracking-tight"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
+              {video.moods}
+            </span>
           </div>
         </div>
 

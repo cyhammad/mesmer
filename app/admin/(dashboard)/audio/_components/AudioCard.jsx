@@ -32,11 +32,21 @@ const AudioCard = ({ audio }) => {
           <h3 className="text-[#1A1A1A] text-[15px] sm:text-[18px] font-bold leading-tight truncate">
             {audio.title}
           </h3>
-          <p className="text-[#717171] text-[12px] sm:text-[14px] mt-0.5">
+          <p
+            className="text-[#717171] text-[12px] sm:text-[14px] mt-0.5 tracking-tight"
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
             {audio.duration}
           </p>
         </div>
-        <p className="text-[#717171] text-[12px] sm:text-[14px] truncate">
+        <p
+          className="text-[#717171] text-[12px] sm:text-[14px] truncate tracking-tight"
+          style={{
+            fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+          }}
+        >
           — {audio.categories}
         </p>
       </div>

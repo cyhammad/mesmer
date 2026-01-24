@@ -27,7 +27,7 @@ const DeleteVideoDialog = ({ children, onConfirm, videoName }) => {
               Delete &quot;{videoName}&quot;
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete this video content?
+              Are you sure you want to delete &quot;{videoName}&quot;
             </p>
           </div>
           <DialogClose className="outline-none">

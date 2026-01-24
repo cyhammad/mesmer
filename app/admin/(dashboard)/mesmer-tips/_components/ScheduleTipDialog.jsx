@@ -123,12 +123,12 @@ const ScheduleTipDialog = ({ children }) => {
             <DialogClose asChild>
               <Button
                 variant="outline"
-                className="w-full sm:w-[80px] h-[42px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] font-bold"
+                className="w-full sm:w-[107px] h-[54px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[18px] font-bold"
               >
                 Cancel
               </Button>
             </DialogClose>
-            <Button className="w-full sm:w-auto h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
+            <Button className="w-full sm:w-[194px] h-[54px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[18px] font-bold whitespace-nowrap">
               Schedule Now
             </Button>
           </div>

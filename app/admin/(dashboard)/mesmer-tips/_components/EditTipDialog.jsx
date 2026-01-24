@@ -106,13 +106,7 @@ const EditTipDialog = ({ children, tip }) => {
 
         {/* Footer */}
         <div className="p-4 sm:p-5 border-t border-[#F3F4F6] flex flex-col sm:flex-row items-center sm:justify-between gap-3 bg-white shrink-0">
-          <ScheduleTipDialog>
-            <button className="text-[#8F00FF] text-[12px] font-bold hover:underline whitespace-nowrap order-2 sm:order-1">
-              Reschedule
-            </button>
-          </ScheduleTipDialog>
-
-          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
+          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto order-1 sm:order-2 ml-auto">
             <DialogClose asChild>
               <Button
                 variant="outline"
@@ -122,7 +116,7 @@ const EditTipDialog = ({ children, tip }) => {
               </Button>
             </DialogClose>
             <Button className="w-full sm:w-auto h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
-              Save Changes
+              Add Tip
             </Button>
           </div>
         </div>
