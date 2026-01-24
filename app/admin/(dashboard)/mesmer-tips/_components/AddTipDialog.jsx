@@ -102,26 +102,24 @@ const AddTipDialog = ({ children }) => {
           </div>
         </div>
 
-        <div className="p-4 sm:p-5 border-t border-[#F3F4F6] flex flex-col sm:flex-row items-center sm:justify-between gap-3 bg-white shrink-0">
+        <div className="px-4 max-w-[570px] w-full py-5 border-t border-[#F3F4F6] flex sm:flex-row items-center justify-between gap-3 bg-white shrink-0">
           <ScheduleTipDialog>
-            <button className="text-[#8F00FF] text-[12px] font-bold hover:underline whitespace-nowrap order-2 sm:order-1">
+            <button className="text-[#8F00FF] text-[18px] font-bold hover:underline whitespace-nowrap">
               Schedule for Later
             </button>
           </ScheduleTipDialog>
 
-          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto order-1 sm:order-2">
-            <DialogClose asChild>
-              <Button
-                variant="outline"
-                className="w-full sm:w-[80px] h-[42px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[14px] font-bold"
-              >
-                Cancel
-              </Button>
-            </DialogClose>
-            <Button className="w-full sm:w-auto h-[42px] px-6 rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] font-bold whitespace-nowrap">
-              Add Tip for Today
+          <DialogClose asChild>
+            <Button
+              variant="outline"
+              className="h-[54px] w-[107px] rounded-full border-[#8F00FF] text-[#8F00FF] hover:bg-[#F3E8FF] hover:text-[#8F00FF] text-[18px] font-bold"
+            >
+              Cancel
             </Button>
-          </div>
+          </DialogClose>
+          <Button className="h-[54px] w-[194px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[18px] font-bold whitespace-nowrap">
+            Add Tip for Today
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

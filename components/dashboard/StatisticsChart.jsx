@@ -78,18 +78,18 @@ const CustomTooltip = ({ active, payload, label }) => {
     const originalPayload = payload[0].payload;
 
     return (
-      <div className="bg-[#1A1C1E] text-white p-3 rounded-[12px] shadow-xl border-none text-xs min-w-[140px]">
+      <div className="bg-[#1A1C1E] text-white p-3 rounded-[12px] shadow-xl border-none text-xs">
         <p className="font-semibold mb-2">{monthName} 2025</p>
-        <div className="space-y-1.5 text-[11px]">
-          <div className="flex items-center gap-2">
+        <div className=" flex flex-col gap-1 text-[11px]">
+          <div className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-[2px] bg-[#FF5C35]" />
-            <span className="text-gray-400">New Users:</span>
-            <span className="font-medium ml-auto">{originalPayload.users}</span>
+            <span className="text-[12px]">New Users:</span>
+            <span className="font-medium text-[12px]">{originalPayload.users}</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <div className="w-2.5 h-2.5 rounded-[2px] bg-[#8F00FF]" />
-            <span className="text-gray-400">Earnings:</span>
-            <span className="font-medium ml-auto">
+            <span className="text-[12px]">Earnings:</span>
+            <span className="font-medium text-[12px]">
               ${originalPayload.earnings}
             </span>
           </div>

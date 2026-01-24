@@ -24,11 +24,10 @@ const DeleteVideoDialog = ({ children, onConfirm, videoName }) => {
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
             <DialogTitle className="text-[18px] sm:text-[20px] font-bold text-[#111827]">
-              Delete Video Content
+              Delete &quot;{videoName}&quot;
             </DialogTitle>
             <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete{" "}
-              {videoName ? <strong>{videoName}</strong> : "this video file"}?
+              Are you sure you want to delete this video content?
             </p>
           </div>
           <DialogClose className="outline-none">

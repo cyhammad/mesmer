@@ -2,12 +2,12 @@ import React from "react";
 
 const Tabs = ({ tabs, activeTab, onTabChange }) => {
   return (
-    <div className="flex gap-8 ml-6 mb-3">
+    <div className="flex gap-6 ml-6 mb-3">
       {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => onTabChange(tab)}
-          className={`pb-3 text-[16px] font-bold transition-all relative ${
+          className={`pb-3 text-[16px] font-medium transition-all relative ${
             activeTab === tab ? "text-[#8F00FF]" : "text-[#8E8E93]"
           }`}
           style={{ fontFamily: "var(--font-inter), sans-serif" }}

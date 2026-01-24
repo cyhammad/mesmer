@@ -29,11 +29,10 @@ const LogoutDialog = ({ children }) => {
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
             <DialogTitle className="text-[20px] font-bold text-[#111827]">
-              Logout Confirmation
+              Logout
             </DialogTitle>
             <p className="text-[16px] text-[#6B7280]">
-              Are you sure you want to logout? You will need to sign in again to
-              access the dashboard.
+              Are you sure you want to logout?
             </p>
           </div>
           <DialogClose className="outline-none">
@@ -55,7 +54,7 @@ const LogoutDialog = ({ children }) => {
             className="w-full sm:flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold"
             onClick={handleLogout}
           >
-            Yes, Logout
+            Yes Logout
           </Button>
         </div>
       </DialogContent>

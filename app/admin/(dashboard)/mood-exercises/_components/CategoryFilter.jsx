@@ -13,7 +13,7 @@ const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => {
               className={`flex min-w-fit h-[38px] items-center gap-[10px] px-[12px] py-[8px] rounded-[12px] border transition-all whitespace-nowrap ${
                 isActive
                   ? "bg-[#F3E8FF] border-[#8F00FF] text-[#8F00FF]"
-                  : "bg-white border-gray-200 text-black hover:border-gray-300"
+                  : "bg-white border-[#FFCFEE] text-black hover:bg-[#FFF5FB]"
               }`}
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
