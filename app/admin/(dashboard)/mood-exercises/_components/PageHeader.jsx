@@ -5,7 +5,10 @@ const PageHeader = ({ title, subtitle, onAddClick }) => {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <div className="space-y-1 sm:space-y-3">
-        <h1 className="text-[28px] tracking-tight font-bold text-[#1A1A1A]">
+        <h1
+          className="text-2xl font-bold text-[#1A1A1A]"
+          style={{ fontFamily: "var(--font-nunito-sans)" }}
+        >
           {title}
         </h1>
         <p
