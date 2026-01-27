@@ -23,6 +23,16 @@ const Label = ({ children, required }) => (
   </label>
 );
 
+const Input = ({ value, placeholder, type = "text" }) => (
+  <input
+    type={type}
+    defaultValue={value}
+    placeholder={placeholder}
+    className="w-full h-[52px] rounded-[10px] border border-[#E5E7EB] px-4 text-[14px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+    style={{ fontFamily: "'Inter Display', var(--font-inter), sans-serif" }}
+  />
+);
+
 const TextArea = ({ value, placeholder }) => (
   <textarea
     defaultValue={value}
@@ -102,6 +112,11 @@ const EditStoryDialog = ({ children, story }) => {
                 />
               ))}
             </div>
+          </div>
+
+          <div className="mt-4">
+            <Label>Date</Label>
+            <Input placeholder="04/08/2025" value={story.date} />
           </div>
         </div>
 

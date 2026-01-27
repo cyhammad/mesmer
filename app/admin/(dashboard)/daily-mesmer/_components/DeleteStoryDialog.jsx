@@ -28,11 +28,15 @@ const DeleteStoryDialog = ({ children, onConfirm, storyContent }) => {
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
             <DialogTitle className="text-[18px] sm:text-[20px] font-bold text-[#111827]">
-              Delete Story
+              Delete Exercise
             </DialogTitle>
-            <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
-              Are you sure you want to delete{" "}
-              {storySnippet ? <strong>"{storySnippet}"</strong> : "this story"}?
+            <p
+              className="text-[14px] sm:text-[16px] text-[#6B7280]"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
+              Are you sure you want to delete the exercise?
             </p>
           </div>
           <DialogClose className="outline-none">

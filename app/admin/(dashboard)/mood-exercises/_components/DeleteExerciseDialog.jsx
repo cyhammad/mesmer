@@ -17,7 +17,7 @@ const DeleteExerciseDialog = ({ children, onConfirm }) => {
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}
-        className="w-[90%] sm:max-w-[562px] p-5 sm:p-6 flex flex-col gap-5 sm:gap-6 bg-white rounded-[20px] sm:rounded-[24px] overflow-hidden border-none outline-none shadow-xl h-auto"
+        className="w-[90%] sm:w-[562px] sm:h-[216px] gap-0 py-9 flex flex-col bg-white rounded-[24px] overflow-hidden border-none outline-none shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -26,7 +26,12 @@ const DeleteExerciseDialog = ({ children, onConfirm }) => {
             <DialogTitle className="text-[18px] sm:text-[20px] font-bold text-[#111827]">
               Delete Exercise?
             </DialogTitle>
-            <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
+            <p
+              className="text-[14px] sm:text-[16px] text-[#6B7280]"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
               Are you sure you want to delete the exercise?
             </p>
           </div>

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { CloseCircleIcon } from "@/app/admin/(dashboard)/audio/_components/Icons";
+import { X } from "lucide-react";
 
 const LogoutDialog = ({ children }) => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const LogoutDialog = ({ children }) => {
             </p>
           </div>
           <DialogClose className="outline-none">
-            <CloseCircleIcon className="w-6 h-6 cursor-pointer" />
+            <X className="w-6 h-6 cursor-pointer text-[#6B7280] hover:text-[#111827] transition-colors" />
           </DialogClose>
         </div>
 

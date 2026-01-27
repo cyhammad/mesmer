@@ -12,7 +12,7 @@ const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => {
               onClick={() => onCategoryChange(isActive ? null : cat.name)}
               className={`flex min-w-fit h-[38px] items-center gap-[10px] px-[12px] py-[8px] rounded-[12px] border transition-all whitespace-nowrap ${
                 isActive
-                  ? "bg-[#F3E8FF] border-[#8F00FF] text-[#8F00FF]"
+                  ? "border-[#8F00FF] text-[#8F00FF]"
                   : "bg-white border-[#FFCFEE] text-black hover:bg-[#FFF5FB]"
               }`}
               style={{
@@ -20,6 +20,7 @@ const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => {
                 fontWeight: 600,
                 fontSize: "12px",
                 lineHeight: "16px",
+                backgroundColor: isActive ? "#E576BD1A" : undefined,
               }}
             >
               <span className="flex-1 text-left truncate">{cat.name}</span>

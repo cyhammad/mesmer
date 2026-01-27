@@ -17,8 +17,6 @@ import {
   MoodExercisesIcon,
   DailyMesmerIcon,
   MesmerTipsIcon,
-  AudioContentIcon,
-  VideoContentIcon,
   SettingsIcon,
   LogoutIcon,
 } from "@/components/icons/icons";
@@ -44,16 +42,6 @@ const menuItems = [
     title: "Mesmer Tips",
     icon: MesmerTipsIcon,
     href: "/admin/mesmer-tips",
-  },
-  {
-    title: "Audio Content",
-    icon: AudioContentIcon,
-    href: "/admin/audio",
-  },
-  {
-    title: "Video Content",
-    icon: VideoContentIcon,
-    href: "/admin/video",
   },
   {
     title: "Settings",

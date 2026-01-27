@@ -30,7 +30,12 @@ const DeleteTipDialog = ({ children, onConfirm, tipContent }) => {
             <DialogTitle className="text-[18px] sm:text-[20px] font-bold text-[#111827]">
               Delete Tip
             </DialogTitle>
-            <p className="text-[14px] sm:text-[16px] text-[#6B7280]">
+            <p
+              className="text-[14px] sm:text-[16px] text-[#6B7280]"
+              style={{
+                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+              }}
+            >
               Are you sure you want to delete this tip?
             </p>
           </div>

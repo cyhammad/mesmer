@@ -242,7 +242,7 @@ const EditExerciseDialog = ({ children, exercise }) => {
                 fontFamily: "'Inter Display', var(--font-inter), sans-serif",
               }}
             >
-              Save & Next
+              Edit Exercise
             </Button>
           </EditExerciseStepsDialog>
         </div>
