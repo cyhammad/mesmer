@@ -17,7 +17,6 @@ import {
   MoodExercisesIcon,
   DailyMesmerIcon,
   MesmerTipsIcon,
-  SettingsIcon,
   LogoutIcon,
 } from "@/components/icons/icons";
 import LogoutDialog from "@/components/dashboard/LogoutDialog";
@@ -42,11 +41,6 @@ const menuItems = [
     title: "Mesmer Tips",
     icon: MesmerTipsIcon,
     href: "/admin/mesmer-tips",
-  },
-  {
-    title: "Settings",
-    icon: SettingsIcon,
-    href: "/admin/settings",
   },
 ];
 
