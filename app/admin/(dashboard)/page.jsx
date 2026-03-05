@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import KPICard from "@/components/dashboard/KPICard";
 import { StatisticsChart } from "@/components/dashboard/StatisticsChart";
 import { NewUsersTable } from "@/components/dashboard/NewUsersTable";
@@ -11,6 +11,39 @@ import {
 } from "@/components/icons/icons";
 
 const DashboardPage = () => {
+  const [users, setUsers] = useState([]);
+  const [totalUsers, setTotalUsers] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchUsers() {
+      try {
+        const res = await fetch("/api/admin/users", { credentials: "include" });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || "Failed to load users");
+        }
+        const data = await res.json();
+        if (!cancelled) {
+          setUsers(data.users ?? []);
+          setTotalUsers(data.total ?? 0);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          setError(e.message);
+          setUsers([]);
+          setTotalUsers(0);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    fetchUsers();
+    return () => { cancelled = true; };
+  }, []);
+
   return (
     <div className="p-4 md:p-6 space-y-6 bg-[#FDFCFD] min-h-full">
       <div className="flex items-center justify-between">
@@ -26,7 +59,7 @@ const DashboardPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <KPICard
           title="Total Users"
-          value="500+"
+          value={totalUsers !== null ? String(totalUsers) : "—"}
           percentage="+ 20%"
           icon={UserIDIcon}
           iconBgColor="bg-[#FFF1EE]"
@@ -54,7 +87,11 @@ const DashboardPage = () => {
       <StatisticsChart />
 
       {/* New Users Table Section */}
-      <NewUsersTable />
+      <NewUsersTable
+        users={users}
+        loading={loading}
+        error={error}
+      />
     </div>
   );
 };
