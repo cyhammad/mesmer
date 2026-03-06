@@ -9,13 +9,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
+import { getClientAuth } from "@/lib/firebase/client";
+import { signOut } from "firebase/auth";
 
 const LogoutDialog = ({ children }) => {
   const router = useRouter();
 
-  const handleLogout = () => {
-    // Perform logout logic here (e.g., clearing tokens)
+  const handleLogout = async () => {
+    const auth = getClientAuth();
+    if (auth) await signOut(auth);
+    await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
     router.push("/admin/sign-in");
+    router.refresh();
   };
 
   return (

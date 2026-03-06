@@ -1,7 +1,19 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import DashboardSidebar from "@/components/dashboard/sidebar/DashboardSidebar";
 import DashboardTopbar from "@/components/dashboard/DashboardTopbar";
+import { verifyIdToken } from "@/lib/firebase/auth-server";
 
-const AdminDashboardLayout = ({ children }) => {
+const SESSION_COOKIE_NAME = "mesmer_session";
+
+const AdminDashboardLayout = async ({ children }) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+  const decoded = token ? await verifyIdToken(token) : null;
+  if (!decoded) {
+    redirect("/admin/sign-in");
+  }
+
   return (
     <div className="flex h-screen overflow-hidden bg-white">
       <DashboardSidebar />
