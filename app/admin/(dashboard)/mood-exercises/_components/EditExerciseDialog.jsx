@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { BackArrow, CloudUploadIcon, ReadIcon, CheckmarkIcon } from "./Icons";
 import { cn } from "@/lib/utils";
-import EditExerciseStepsDialog from "./EditExerciseStepsDialog";
 
 const Label = ({ children, required }) => (
   <label
@@ -19,31 +18,6 @@ const Label = ({ children, required }) => (
     {children}
     {required && <span className="text-[#8F00FF] ml-1">*</span>}
   </label>
-);
-
-const Input = ({ value, placeholder, suffix, type = "text" }) => (
-  <div className="relative">
-    <input
-      type={type}
-      defaultValue={value}
-      placeholder={placeholder}
-      className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
-    />
-    {suffix && (
-      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#9CA3AF]">
-        {suffix}
-      </span>
-    )}
-  </div>
-);
-
-const TextArea = ({ value, placeholder, rows = 4 }) => (
-  <textarea
-    defaultValue={value}
-    placeholder={placeholder}
-    rows={rows}
-    className="w-full rounded-[12px] border border-[#E5E7EB] p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
-  />
 );
 
 const CategoryChip = ({ name, isSelected, onClick }) => (
@@ -66,11 +40,13 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
   </button>
 );
 
-const MediaPlaceholder = ({ label, icon, placeholder = "Choose File" }) => (
+const MediaPlaceholder = ({ label, icon, value, placeholder = "Choose File" }) => (
   <div className="flex flex-col gap-1">
     <Label>{label}</Label>
     <div className="w-full h-[56px] bg-[#F3E8FF] rounded-[8px] flex items-center px-4 justify-between border border-transparent cursor-pointer hover:border-[#8F00FF]/30 transition-all">
-      <span className="text-[#999DA0] text-[14px]">{placeholder}</span>
+      <span className="text-[#999DA0] text-[14px] truncate max-w-[80%]">
+        {value || placeholder}
+      </span>
       <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
         {icon}
       </div>
@@ -78,8 +54,24 @@ const MediaPlaceholder = ({ label, icon, placeholder = "Choose File" }) => (
   </div>
 );
 
-const EditExerciseDialog = ({ children, exercise }) => {
-  const [selectedCategory, setSelectedCategory] = useState("School & Exams");
+const EditExerciseDialog = ({ children, exercise, onUpdate }) => {
+  const [formData, setFormData] = useState({
+    title: exercise?.title || "",
+    description: exercise?.description || "",
+    category: exercise?.categoryName || exercise?.category || "",
+    duration: exercise?.duration || 0,
+    theScience: exercise?.theScience || "",
+    mesmerFact: exercise?.mesmerFact || "",
+    whatItIs: exercise?.whatItIs || "",
+    whatYouDo: exercise?.whatYouDo || "",
+    whenToUse: exercise?.whenToUse || "",
+    read: exercise?.read || "",
+    listen: exercise?.listen || "",
+    watch: exercise?.watch || "",
+    steps: exercise?.steps || [],
+  });
+
+  const [saving, setSaving] = useState(false);
 
   const categories = [
     "School & Exams",
@@ -95,6 +87,25 @@ const EditExerciseDialog = ({ children, exercise }) => {
     "Focused",
     "Free",
   ];
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSave = async () => {
+    if (!onUpdate) return;
+    setSaving(true);
+    try {
+      await onUpdate({
+        id: exercise.id,
+        ...formData,
+        categoryName: formData.category,
+        duration: Number(formData.duration) || 0,
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <Dialog>
@@ -123,15 +134,23 @@ const EditExerciseDialog = ({ children, exercise }) => {
 
             <div>
               <Label required>Title</Label>
-              <Input value={exercise.title} placeholder="Enter" />
+              <input
+                type="text"
+                value={formData.title}
+                onChange={(e) => handleChange("title", e.target.value)}
+                placeholder="Enter"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
               <Label>Description</Label>
-              <TextArea
-                value={exercise.subtitle}
+              <textarea
+                value={formData.description}
+                onChange={(e) => handleChange("description", e.target.value)}
                 placeholder="Brief description of the exercise"
                 rows={4}
+                className="w-full rounded-[12px] border border-[#E5E7EB] p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
               />
             </div>
 
@@ -142,82 +161,116 @@ const EditExerciseDialog = ({ children, exercise }) => {
                   <CategoryChip
                     key={cat}
                     name={cat}
-                    isSelected={selectedCategory === cat}
-                    onClick={() => setSelectedCategory(cat)}
+                    isSelected={formData.category === cat}
+                    onClick={() => handleChange("category", cat)}
                   />
                 ))}
               </div>
             </div>
 
             <div>
-              <Label>Order Number</Label>
-              <Input
-                type="number"
-                value={exercise.order?.replace("Order ", "") || "1"}
-              />
-            </div>
-
-            <div>
-              <Label>Add Time</Label>
-              <Input
-                value={exercise.duration?.replace(" mins", "") || "10"}
-                placeholder="10"
-                suffix="mins"
-              />
+              <Label>Duration</Label>
+              <div className="relative">
+                <input
+                  type="number"
+                  value={formData.duration}
+                  onChange={(e) => handleChange("duration", e.target.value)}
+                  placeholder="10"
+                  className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#9CA3AF]">
+                  mins
+                </span>
+              </div>
             </div>
 
             <div>
               <Label>The Science</Label>
-              <Input placeholder="Enter" />
+              <input
+                type="text"
+                value={formData.theScience}
+                onChange={(e) => handleChange("theScience", e.target.value)}
+                placeholder="Enter"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
               <Label>Mesmer Fact</Label>
-              <Input placeholder="Enter" />
+              <input
+                type="text"
+                value={formData.mesmerFact}
+                onChange={(e) => handleChange("mesmerFact", e.target.value)}
+                placeholder="Enter"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
-              <Label>What it is</Label>
-              <Input
-                value="Athletes use this to access peak performance on demand"
+              <Label>What It Is</Label>
+              <input
+                type="text"
+                value={formData.whatItIs}
+                onChange={(e) => handleChange("whatItIs", e.target.value)}
                 placeholder="e.g: Athletes use this to access peak performance on demand"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
               />
             </div>
 
             <div>
-              <Label>What you do</Label>
-              <Input
-                value="Create an imaginary circle, fill it with confidence, step in when you need it"
+              <Label>What You Do</Label>
+              <input
+                type="text"
+                value={formData.whatYouDo}
+                onChange={(e) => handleChange("whatYouDo", e.target.value)}
                 placeholder="e.g: Create an imaginary circle, fill it with confidence, step in when you need it"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
               />
             </div>
 
             <div>
-              <Label>When to use</Label>
-              <Input
-                value="Before presentations, social situations, difficult conversations"
+              <Label>When To Use</Label>
+              <input
+                type="text"
+                value={formData.whenToUse}
+                onChange={(e) => handleChange("whenToUse", e.target.value)}
                 placeholder="e.g: Before presentations, social situations, difficult conversations"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
               />
             </div>
 
             <div>
-              <Label>WHY</Label>
-              <Input placeholder="e.g: Before presentations, social situations, difficult conversations" />
+              <Label>Read</Label>
+              <textarea
+                value={formData.read}
+                onChange={(e) => handleChange("read", e.target.value)}
+                placeholder="Enter reading content"
+                rows={3}
+                className="w-full rounded-[12px] border border-[#E5E7EB] p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
+              />
             </div>
 
-            <MediaPlaceholder
-              label="Read"
-              placeholder="Let the sound waves calibrate your inner compass"
-              icon={<ReadIcon className="w-5 h-5" />}
-            />
-            <MediaPlaceholder
-              label="Listen (.mp3)"
-              icon={<CloudUploadIcon className="w-5 h-5" />}
-            />
-            <MediaPlaceholder
-              label="Watch (.mp4)"
-              icon={<CloudUploadIcon className="w-5 h-5" />}
-            />
+            <div>
+              <Label>Listen URL (.mp3)</Label>
+              <input
+                type="text"
+                value={formData.listen}
+                onChange={(e) => handleChange("listen", e.target.value)}
+                placeholder="https://example.com/audio.mp3"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
+            </div>
+
+            <div>
+              <Label>Watch URL (.mp4)</Label>
+              <input
+                type="text"
+                value={formData.watch}
+                onChange={(e) => handleChange("watch", e.target.value)}
+                placeholder="https://example.com/video.mp4"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
+            </div>
           </div>
         </div>
 
@@ -234,17 +287,16 @@ const EditExerciseDialog = ({ children, exercise }) => {
               Cancel
             </Button>
           </DialogClose>
-          <EditExerciseStepsDialog exercise={exercise}>
-            <Button
-              className="flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold"
-              onClick={(e) => e.stopPropagation()}
-              style={{
-                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
-              }}
-            >
-              Edit Exercise
-            </Button>
-          </EditExerciseStepsDialog>
+          <Button
+            className="flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold disabled:opacity-50"
+            onClick={handleSave}
+            disabled={saving}
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
+            {saving ? "Saving..." : "Save Changes"}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

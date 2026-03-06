@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import MesmerLoader from "@/components/ui/MesmerLoader";
 
 const PER_PAGE = 8;
 
@@ -37,8 +38,12 @@ export function NewUsersTable({ users = [], loading = false, error = null }) {
         </p>
       )}
       {loading ? (
-        <div className="py-12 text-center text-[#757575] text-sm">
-          Loading users…
+        <div className="py-12 flex items-center justify-center">
+          <MesmerLoader
+            variant="wave"
+            size="sm"
+            message="Loading users…"
+          />
         </div>
       ) : users.length === 0 ? (
         <div className="py-12 text-center text-[#757575] text-sm">

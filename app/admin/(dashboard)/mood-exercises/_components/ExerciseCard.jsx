@@ -5,17 +5,22 @@ import MakeLiveDialog from "./MakeLiveDialog";
 import EditExerciseDialog from "./EditExerciseDialog";
 import DeleteExerciseDialog from "./DeleteExerciseDialog";
 
-const ExerciseCard = ({ exercise, isDraft }) => {
+const ExerciseCard = ({ exercise, isDraft, onDelete, onUpdate }) => {
+  const stepsCount = Array.isArray(exercise.steps) ? exercise.steps.length : 0;
+  const durationDisplay = `${exercise.duration || 0} mins`;
+  const stepsDisplay = `${String(stepsCount).padStart(2, "0")} steps`;
+  const categoryDisplay = exercise.categoryName || exercise.category || "—";
+
   return (
     <ExerciseDetailsDialog exercise={exercise}>
       <div className="bg-white w-full h-full min-h-[226px] p-4 flex flex-col gap-6 rounded-[16px] border-[1.5px] border-[#EED9FF] hover:shadow-md transition-shadow cursor-pointer text-left">
         {/* Card Header */}
         <div className="flex justify-between items-center mb-0.5">
-          <span className="bg-[#F3E8FF] text-[#8F00FF] text-[15px] font-medium py-3 px-3 rounded-full">
-            {exercise.order}
+          <span className="bg-[#F3E8FF] text-[#8F00FF] text-[13px] font-medium py-2.5 px-3 rounded-full truncate max-w-[60%]">
+            {categoryDisplay}
           </span>
           <div className="flex items-center gap-1">
-            <EditExerciseDialog exercise={exercise}>
+            <EditExerciseDialog exercise={exercise} onUpdate={onUpdate}>
               <button
                 className="p-1 hover:bg-gray-50 rounded-full transition-colors"
                 onClick={(e) => {
@@ -25,7 +30,7 @@ const ExerciseCard = ({ exercise, isDraft }) => {
                 <EditIcon />
               </button>
             </EditExerciseDialog>
-            <DeleteExerciseDialog onConfirm={() => console.log("Deleting...")}>
+            <DeleteExerciseDialog onConfirm={onDelete}>
               <button
                 className="p-1 hover:bg-red-50 rounded-full transition-colors"
                 onClick={(e) => {
@@ -46,7 +51,12 @@ const ExerciseCard = ({ exercise, isDraft }) => {
               fontFamily: "'Inter Display', var(--font-inter), sans-serif",
             }}
           >
-            <span className="w-4 h-[1px] bg-[#6C6C6C]" /> {exercise.subtitle}
+            <span className="w-4 h-[1px] bg-[#6C6C6C]" />{" "}
+            {exercise.description
+              ? exercise.description.length > 50
+                ? exercise.description.substring(0, 50) + "..."
+                : exercise.description
+              : "—"}
           </p>
           <h3
             className="text-black text-[18px] font-medium leading-[1.2] line-clamp-2 tracking-tight"
@@ -62,12 +72,12 @@ const ExerciseCard = ({ exercise, isDraft }) => {
         <div className="flex items-center gap-4 text-[#6C6C6C] text-[14px] font-normal mt-2">
           <div className="flex items-center gap-2">
             <ClockIcon />
-            {exercise.duration}
+            {durationDisplay}
           </div>
           <div className="flex items-center gap-2">
             <span className="w-1 h-1 bg-[#6C6C6C] rounded-full" />
             <StepsIcon />
-            {exercise.steps}
+            {stepsDisplay}
           </div>
         </div>
 

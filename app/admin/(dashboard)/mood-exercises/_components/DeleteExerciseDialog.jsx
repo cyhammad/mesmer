@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +10,22 @@ import { Button } from "@/components/ui/button";
 import { CloseCircleIcon } from "./Icons";
 
 const DeleteExerciseDialog = ({ children, onConfirm }) => {
+  const [deleting, setDeleting] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleDelete = async () => {
+    if (!onConfirm) return;
+    setDeleting(true);
+    try {
+      await onConfirm();
+      setOpen(false);
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild onClick={(e) => e.stopPropagation()}>
         {children}
       </DialogTrigger>
@@ -32,7 +46,8 @@ const DeleteExerciseDialog = ({ children, onConfirm }) => {
                 fontFamily: "'Inter Display', var(--font-inter), sans-serif",
               }}
             >
-              Are you sure you want to delete the exercise?
+              Are you sure you want to delete this exercise? This action cannot
+              be undone.
             </p>
           </div>
           <DialogClose className="outline-none">
@@ -54,15 +69,14 @@ const DeleteExerciseDialog = ({ children, onConfirm }) => {
             </Button>
           </DialogClose>
           <Button
-            className="w-full sm:flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[14px] sm:text-[16px] font-bold"
-            onClick={() => {
-              if (onConfirm) onConfirm();
-            }}
+            className="w-full sm:flex-1 h-[44px] sm:h-[52px] rounded-full bg-[#FF4B4B] hover:bg-red-600 text-white text-[14px] sm:text-[16px] font-bold disabled:opacity-50"
+            onClick={handleDelete}
+            disabled={deleting}
             style={{
               fontFamily: "'Inter Display', var(--font-inter), sans-serif",
             }}
           >
-            Yes Delete
+            {deleting ? "Deleting..." : "Yes, Delete"}
           </Button>
         </div>
       </DialogContent>

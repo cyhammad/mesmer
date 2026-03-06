@@ -7,9 +7,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { BackArrow, CloudUploadIcon, ReadIcon, CheckmarkIcon } from "./Icons";
+import { BackArrow, CloudUploadIcon, ReadIcon, CheckmarkIcon, TrashIconWhite } from "./Icons";
 import { cn } from "@/lib/utils";
-import CreateExerciseStepsDialog from "./CreateExerciseStepsDialog";
 
 const Label = ({ children, required }) => (
   <label
@@ -19,31 +18,6 @@ const Label = ({ children, required }) => (
     {children}
     {required && <span className="text-[#8F00FF] ml-1">*</span>}
   </label>
-);
-
-const Input = ({ value, placeholder, suffix, type = "text" }) => (
-  <div className="relative">
-    <input
-      type={type}
-      defaultValue={value}
-      placeholder={placeholder}
-      className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
-    />
-    {suffix && (
-      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#9CA3AF]">
-        {suffix}
-      </span>
-    )}
-  </div>
-);
-
-const TextArea = ({ value, placeholder, rows = 4 }) => (
-  <textarea
-    defaultValue={value}
-    placeholder={placeholder}
-    rows={rows}
-    className="w-full rounded-[12px] border border-[#E5E7EB] p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
-  />
 );
 
 const CategoryChip = ({ name, isSelected, onClick }) => (
@@ -66,20 +40,67 @@ const CategoryChip = ({ name, isSelected, onClick }) => (
   </button>
 );
 
-const MediaPlaceholder = ({ label, icon, placeholder = "Choose File" }) => (
-  <div className="flex flex-col gap-1">
-    <Label>{label}</Label>
-    <div className="w-full h-[56px] bg-[#F3E8FF] rounded-[8px] flex items-center px-4 justify-between border border-transparent cursor-pointer hover:border-[#8F00FF]/30 transition-all">
-      <span className="text-[#999DA0] text-[14px]">{placeholder}</span>
-      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-        {icon}
+const StepCard = ({ index, step, onChange, onDelete }) => {
+  const stepNumber = String(index + 1).padStart(2, "0");
+  return (
+    <div className="bg-[#F3E8FF] rounded-[24px] p-6 relative flex flex-col gap-4">
+      <div className="flex justify-between items-center">
+        <h4 className="text-[18px] font-bold text-[#111827]">
+          Step {stepNumber}
+        </h4>
+        <button
+          onClick={onDelete}
+          className="w-10 h-10 bg-[#FF4B4B] rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+        >
+          <TrashIconWhite className="w-5 h-5" />
+        </button>
+      </div>
+
+      <div>
+        <Label required>Step Title</Label>
+        <input
+          type="text"
+          value={step.title || ""}
+          onChange={(e) => onChange(index, "title", e.target.value)}
+          placeholder="Enter step title"
+          className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] bg-white px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+        />
+      </div>
+
+      <div>
+        <Label required>Description</Label>
+        <textarea
+          value={step.description || ""}
+          onChange={(e) => onChange(index, "description", e.target.value)}
+          placeholder="Brief description of the step"
+          rows={3}
+          className="w-full rounded-[12px] border border-[#E5E7EB] bg-white p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
+        />
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const CreateExerciseDialog = ({ children }) => {
-  const [selectedCategory, setSelectedCategory] = useState("School & Exams");
+const CreateExerciseDialog = ({ children, onCreate }) => {
+  const initialForm = {
+    title: "",
+    description: "",
+    category: "",
+    duration: "",
+    theScience: "",
+    mesmerFact: "",
+    whatItIs: "",
+    whatYouDo: "",
+    whenToUse: "",
+    read: "",
+    listen: "",
+    watch: "",
+  };
+
+  const [formData, setFormData] = useState(initialForm);
+  const [steps, setSteps] = useState([{ title: "", description: "" }]);
+  const [saving, setSaving] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const categories = [
     "School & Exams",
@@ -96,8 +117,50 @@ const CreateExerciseDialog = ({ children }) => {
     "Free",
   ];
 
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleStepChange = (index, field, value) => {
+    setSteps((prev) => {
+      const newSteps = [...prev];
+      newSteps[index] = { ...newSteps[index], [field]: value };
+      return newSteps;
+    });
+  };
+
+  const addStep = () => {
+    setSteps([...steps, { title: "", description: "" }]);
+  };
+
+  const deleteStep = (index) => {
+    if (steps.length > 1) {
+      setSteps(steps.filter((_, i) => i !== index));
+    }
+  };
+
+  const handleCreate = async () => {
+    if (!onCreate) return;
+    setSaving(true);
+    try {
+      await onCreate({
+        ...formData,
+        categoryName: formData.category,
+        duration: Number(formData.duration) || 0,
+        isMood: true,
+        steps: steps.filter((s) => s.title || s.description),
+      });
+      // Reset form
+      setFormData(initialForm);
+      setSteps([{ title: "", description: "" }]);
+      setOpen(false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
         showCloseButton={false}
@@ -120,14 +183,23 @@ const CreateExerciseDialog = ({ children }) => {
 
             <div>
               <Label required>Title</Label>
-              <Input placeholder="Enter" />
+              <input
+                type="text"
+                value={formData.title}
+                onChange={(e) => handleChange("title", e.target.value)}
+                placeholder="Enter"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
               <Label>Description</Label>
-              <TextArea
+              <textarea
+                value={formData.description}
+                onChange={(e) => handleChange("description", e.target.value)}
                 placeholder="Brief description of the exercise"
                 rows={4}
+                className="w-full rounded-[12px] border border-[#E5E7EB] p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
               />
             </div>
 
@@ -138,66 +210,140 @@ const CreateExerciseDialog = ({ children }) => {
                   <CategoryChip
                     key={cat}
                     name={cat}
-                    isSelected={selectedCategory === cat}
-                    onClick={() => setSelectedCategory(cat)}
+                    isSelected={formData.category === cat}
+                    onClick={() => handleChange("category", cat)}
                   />
                 ))}
               </div>
             </div>
 
             <div>
-              <Label>Order Number</Label>
-              <Input type="number" value="0" />
-            </div>
-
-            <div>
-              <Label>Add Time</Label>
-              <Input placeholder="10" suffix="mins" />
+              <Label>Duration</Label>
+              <div className="relative">
+                <input
+                  type="number"
+                  value={formData.duration}
+                  onChange={(e) => handleChange("duration", e.target.value)}
+                  placeholder="10"
+                  className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+                />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#9CA3AF]">
+                  mins
+                </span>
+              </div>
             </div>
 
             <div>
               <Label>The Science</Label>
-              <Input placeholder="Enter" />
+              <input
+                type="text"
+                value={formData.theScience}
+                onChange={(e) => handleChange("theScience", e.target.value)}
+                placeholder="Enter"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
               <Label>Mesmer Fact</Label>
-              <Input placeholder="Enter" />
+              <input
+                type="text"
+                value={formData.mesmerFact}
+                onChange={(e) => handleChange("mesmerFact", e.target.value)}
+                placeholder="Enter"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
-              <Label>What it is</Label>
-              <Input placeholder="e.g: Athletes use this to access peak performance on demand" />
+              <Label>What It Is</Label>
+              <input
+                type="text"
+                value={formData.whatItIs}
+                onChange={(e) => handleChange("whatItIs", e.target.value)}
+                placeholder="e.g: Athletes use this to access peak performance on demand"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
-              <Label>What you do</Label>
-              <Input placeholder="e.g: Create an imaginary circle, fill it with confidence, step in when you need it" />
+              <Label>What You Do</Label>
+              <input
+                type="text"
+                value={formData.whatYouDo}
+                onChange={(e) => handleChange("whatYouDo", e.target.value)}
+                placeholder="e.g: Create an imaginary circle, fill it with confidence, step in when you need it"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
-              <Label>When to use</Label>
-              <Input placeholder="e.g: Before presentations, social situations, difficult conversations" />
+              <Label>When To Use</Label>
+              <input
+                type="text"
+                value={formData.whenToUse}
+                onChange={(e) => handleChange("whenToUse", e.target.value)}
+                placeholder="e.g: Before presentations, social situations, difficult conversations"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
             </div>
 
             <div>
-              <Label>WHY</Label>
-              <Input placeholder="e.g: Before presentations, social situations, difficult conversations" />
+              <Label>Read</Label>
+              <textarea
+                value={formData.read}
+                onChange={(e) => handleChange("read", e.target.value)}
+                placeholder="Enter reading content"
+                rows={3}
+                className="w-full rounded-[12px] border border-[#E5E7EB] p-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors resize-none placeholder:text-[#9CA3AF]"
+              />
             </div>
 
-            <MediaPlaceholder
-              label="Read"
-              placeholder="Let the sound waves calibrate your inner compass"
-              icon={<ReadIcon className="w-5 h-5" />}
-            />
-            <MediaPlaceholder
-              label="Listen (.mp3)"
-              icon={<CloudUploadIcon className="w-5 h-5" />}
-            />
-            <MediaPlaceholder
-              label="Watch (.mp4)"
-              icon={<CloudUploadIcon className="w-5 h-5" />}
-            />
+            <div>
+              <Label>Listen URL (.mp3)</Label>
+              <input
+                type="text"
+                value={formData.listen}
+                onChange={(e) => handleChange("listen", e.target.value)}
+                placeholder="https://example.com/audio.mp3"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
+            </div>
+
+            <div>
+              <Label>Watch URL (.mp4)</Label>
+              <input
+                type="text"
+                value={formData.watch}
+                onChange={(e) => handleChange("watch", e.target.value)}
+                placeholder="https://example.com/video.mp4"
+                className="w-full h-[52px] rounded-[12px] border border-[#E5E7EB] px-4 text-[16px] text-[#111827] focus:outline-none focus:border-[#8F00FF] transition-colors placeholder:text-[#9CA3AF]"
+              />
+            </div>
+
+            {/* Steps Section */}
+            <h3 className="text-[18px] font-bold text-[#111827] mt-4">
+              Exercise Steps <span className="text-[#8F00FF] ml-1">*</span>
+            </h3>
+
+            <div className="flex flex-col gap-6">
+              {steps.map((step, index) => (
+                <StepCard
+                  key={index}
+                  index={index}
+                  step={step}
+                  onChange={handleStepChange}
+                  onDelete={() => deleteStep(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={addStep}
+              className="w-max px-6 py-2 rounded-full border border-[#8F00FF] text-[#8F00FF] text-[14px] font-medium hover:bg-[#F3E8FF] transition-colors"
+            >
+              Add Step
+            </button>
           </div>
         </div>
 
@@ -214,16 +360,16 @@ const CreateExerciseDialog = ({ children }) => {
               Cancel
             </Button>
           </DialogClose>
-          <CreateExerciseStepsDialog>
-            <Button
-              className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold"
-              style={{
-                fontFamily: "'Inter Display', var(--font-inter), sans-serif",
-              }}
-            >
-              Save & Create Steps
-            </Button>
-          </CreateExerciseStepsDialog>
+          <Button
+            className="flex-1 h-[52px] rounded-full bg-[#8F00FF] hover:bg-[#7a00d9] text-white text-[16px] font-bold disabled:opacity-50"
+            onClick={handleCreate}
+            disabled={saving || !formData.title}
+            style={{
+              fontFamily: "'Inter Display', var(--font-inter), sans-serif",
+            }}
+          >
+            {saving ? "Creating..." : "Create Exercise"}
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
