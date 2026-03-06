@@ -19,7 +19,7 @@ function hasSessionCookie(request) {
   return cookie?.value != null && cookie.value.length > 0;
 }
 
-export function middleware(request) {
+export function proxy(request) {
   const { pathname } = request.nextUrl;
 
   // Only protect /admin routes
