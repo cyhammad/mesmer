@@ -30,10 +30,8 @@ export function proxy(request) {
   const isPublic = isAdminPublicPath(pathname);
   const hasSession = hasSessionCookie(request);
 
-  // Logged-in user on a public auth page → redirect to dashboard
-  if (isPublic && hasSession) {
-    return NextResponse.redirect(new URL("/admin", request.url));
-  }
+  // Do not redirect from sign-in to /admin when a cookie exists: a stale cookie
+  // would cause a loop (middleware → /admin → layout rejects token → sign-in → repeat).
 
   // Not logged in and trying to access a private admin page → redirect to sign-in
   if (!isPublic && !hasSession) {
