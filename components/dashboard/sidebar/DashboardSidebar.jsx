@@ -89,7 +89,7 @@ const SidebarNav = ({ currentPath, onNavigate }) => {
                     isActive ? "text-white" : "text-[#757575]"
                   }`}
                 />
-                <span className="font-medium text-[15px]">{item.title}</span>
+                <span className="font-medium  text-[15px]">{item.title}</span>
               </Link>
             );
           })}
